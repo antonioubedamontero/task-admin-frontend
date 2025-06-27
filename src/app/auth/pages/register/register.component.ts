@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-register',
   imports: [],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class RegisterComponent { }
+export default class RegisterComponent {}
