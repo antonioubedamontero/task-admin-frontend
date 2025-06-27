@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-update-task',
   imports: [],
   templateUrl: './update-task.component.html',
-  styleUrl: './update-task.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class UpdateTaskComponent { }
+export default class UpdateTaskComponent {}
