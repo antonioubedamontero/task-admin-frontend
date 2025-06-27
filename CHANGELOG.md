@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Register page.
 - Added Montserrat font.
 - Added user services and interfaces.
+- Added and configured ngx translate.
 
 ## [0.2.0] - 2025-06-24
 

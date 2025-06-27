@@ -1,0 +1,17 @@
+{
+  "login": {
+    "title": "Login",
+    "form": {
+      "email": {
+        "title": "* Email",
+        "placeholder": "example@domain.com"
+      },
+      "password": {
+        "title": "* Password",
+        "placeholder": "123456"
+      }
+    },
+    "loginButton": "Login"
+  },
+  "register": {}
+}

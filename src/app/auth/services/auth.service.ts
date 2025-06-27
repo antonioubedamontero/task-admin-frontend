@@ -17,7 +17,7 @@ const BASE_URL = environment.BASE_URL;
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class AuthService {
   private http = inject(HttpClient);
 
   getUserAvailability(email: string): Observable<UserAvailabilityResponse> {
