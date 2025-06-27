@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Login page.
 - Register page.
 - Added Montserrat font.
+- Added user services and interfaces.
 
 ## [0.2.0] - 2025-06-24
 
