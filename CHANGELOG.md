@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [0.3.0] - 2025-06-24
 
+- Login page.
+- Register page.
+- Added Montserrat font.
+
 ## [0.2.0] - 2025-06-24
 
 - Create development and production environments.
