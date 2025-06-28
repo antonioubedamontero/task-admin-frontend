@@ -13,5 +13,30 @@
     },
     "loginButton": "Entrar"
   },
-  "register": {}
+  "register": {
+    "title": "Alta de usuario",
+    "form": {
+      "email": {
+        "title": "* Email",
+        "placeholder": "example@domain.com"
+      },
+      "name": {
+        "title": "* Nombre",
+        "placeholder": "Jhon"
+      },
+      "surname": {
+        "title": "* Apellido",
+        "placeholder": "Doe"
+      },
+      "password": {
+        "title": "* Contraseña",
+        "placeholder": "a43$b1E5AqoP"
+      },
+      "repeatPassword": {
+        "title": "* Repita Contraseña",
+        "placeholder": "a43$b1E5AqoP"
+      }
+    },
+    "registerButton": "Alta de usuario"
+  }
 }

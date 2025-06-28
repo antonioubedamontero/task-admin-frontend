@@ -13,5 +13,30 @@
     },
     "loginButton": "Login"
   },
-  "register": {}
+  "register": {
+    "title": "User registration",
+    "form": {
+      "email": {
+        "title": "*Email",
+        "placeholder": "example@domain.com"
+      },
+      "name": {
+        "title": "*Name",
+        "placeholder": "John"
+      },
+      "surname": {
+        "title": "*Last name",
+        "placeholder": "Doe"
+      },
+      "password": {
+        "title": "*Password",
+        "placeholder": "a43$b1E5AqoP"
+      },
+      "repeatPassword": {
+        "title": "*Repeat Password",
+        "placeholder": "a43$b1E5AqoP"
+      }
+    },
+    "registerButton": "User registration"
+  }
 }
