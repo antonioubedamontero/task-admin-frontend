@@ -12,7 +12,8 @@ All notable changes to this project will be documented in this file.
 - Added interfaces.
 - Added auth service.
 - Added form service.
-- Added auth guard.
+- Added Guars: authGuard and loginOrRegisterGuard.
+- Added interceptor to add Authorization header.
 
 ## [0.2.0] - 2025-06-24
 

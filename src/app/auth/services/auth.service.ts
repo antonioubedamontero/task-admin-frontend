@@ -12,7 +12,7 @@ const BASE_URL = environment.BASE_URL;
   providedIn: 'root',
 })
 export class AuthService {
-  token?: string;
+  token = signal<string | null>(null);
   nameAndSurname = signal<string>('');
 
   private http = inject(HttpClient);
@@ -34,14 +34,14 @@ export class AuthService {
 
   saveTokenToStorage(token: string): void {
     if (!token) return;
-    this.token = token;
+    this.token.set(token);
     localStorage.setItem('token', token);
   }
 
   getTokenFromStorage(): void {
     const token = localStorage.getItem('token');
     if (!token) return;
-    this.token = token;
+    this.token.set(token);
   }
 
   saveNameAndSurnameToStorage(nameSurname: string): void {
@@ -54,5 +54,12 @@ export class AuthService {
     const nameSurname = localStorage.getItem('nameAndSurname');
     if (!nameSurname) return;
     this.nameAndSurname.set(nameSurname);
+  }
+
+  logout(): void {
+    this.token.set(null);
+    this.nameAndSurname.set('');
+    localStorage.removeItem('nameAndSurname');
+    localStorage.removeItem('token');
   }
 }
