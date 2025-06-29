@@ -3,8 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { FormService } from '../../services';
-
+import { FormService } from '../../../shared/services';
 @Component({
   selector: 'app-register',
   imports: [TranslateModule, ReactiveFormsModule],
@@ -24,14 +23,12 @@ export default class RegisterComponent {
   });
 
   submitRegister(): void {
-    if (this.registerForm.errors) {
+    if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
 
-    const { repeatPassword, ...data } = this.registerForm.value;
-
     // TODO: Process valid register request
-    console.log('form data', data);
+    console.log('form data', this.registerForm.value);
   }
 }

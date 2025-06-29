@@ -38,5 +38,10 @@
       }
     },
     "registerButton": "Alta de usuario"
+  },
+  "errors": {
+    "email": "El campo no es un email válido",
+    "required": "El campo es obligatorio",
+    "other": "Error no definido"
   }
 }

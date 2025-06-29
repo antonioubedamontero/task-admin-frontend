@@ -27,7 +27,7 @@ body {
   }
 
   .blue-button {
-    @apply my-4 p-2 w-full bg-blue-500 text-white rounded ring hover:ring-gray-500;
+    @apply my-4 p-2 w-full bg-blue-500 disabled:bg-gray-400 text-white rounded ring hover:ring-gray-500;
   }
 
   .input-field {

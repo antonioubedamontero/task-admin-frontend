@@ -109,7 +109,11 @@
     </div>
 
     <div class="form-group">
-      <button class="blue-button" type="submit">
+      <button
+        [disabled]="registerForm.invalid"
+        class="blue-button"
+        type="submit"
+      >
         {{ "register.registerButton" | translate }}
       </button>
     </div>

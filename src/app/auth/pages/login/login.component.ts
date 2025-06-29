@@ -4,8 +4,7 @@ import { Validators } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { FormService } from '../../services';
-
+import { FormService } from '../../../shared/services';
 @Component({
   selector: 'app-login',
   imports: [TranslateModule, ReactiveFormsModule],
@@ -22,7 +21,7 @@ export default class LoginComponent {
   });
 
   submitLogin(): void {
-    if (this.loginForm.errors) {
+    if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }

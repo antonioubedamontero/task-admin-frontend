@@ -38,5 +38,10 @@
       }
     },
     "registerButton": "User registration"
+  },
+  "errors": {
+    "email": "The field is not a valid email",
+    "required": "The field is required",
+    "other": "Undefined error"
   }
 }
