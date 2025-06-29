@@ -1,3 +1,3 @@
 export interface UserAvailabilityResponse {
-  message: string;
+  isAvailable: boolean;
 }

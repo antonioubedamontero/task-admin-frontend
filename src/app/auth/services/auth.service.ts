@@ -1,6 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 
-import { UserService } from './user.service';
+import { Observable } from 'rxjs';
+
+import { environment } from '../../../environments/environment';
+import { ValidateTokenRequest, ValidateTokenResponse } from '../interfaces';
+
+const BASE_URL = environment.BASE_URL;
 
 @Injectable({
   providedIn: 'root',
@@ -9,12 +15,21 @@ export class AuthService {
   token?: string;
   nameAndSurname = signal<string>('');
 
-  userService = inject(UserService);
+  private http = inject(HttpClient);
 
   constructor() {
     // Persist token and name and surname
     this.getTokenFromStorage();
     this.getNameSurnameFromStorage();
+  }
+
+  validateToken(
+    validateTokenRequest: ValidateTokenRequest
+  ): Observable<ValidateTokenResponse> {
+    return this.http.post<ValidateTokenResponse>(
+      `${BASE_URL}/users/validate-token`,
+      validateTokenRequest
+    );
   }
 
   saveTokenToStorage(token: string): void {

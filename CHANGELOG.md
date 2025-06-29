@@ -9,9 +9,10 @@ All notable changes to this project will be documented in this file.
 - Login page.
 - Register page.
 - Added user service.
-- Added interfaces related to user service.
+- Added interfaces.
 - Added auth service.
 - Added form service.
+- Added auth guard.
 
 ## [0.2.0] - 2025-06-24
 

@@ -33,9 +33,12 @@ export class UserService {
       .post<LoginResponse>(`${BASE_URL}/users/login`, userLogin)
       .pipe(
         tap((resp) => {
+          const { token } = resp;
           const { name, surname } = resp.user;
           const nameAndSurname = `${name} ${surname}`;
+
           this.authService.saveNameAndSurnameToStorage(nameAndSurname);
+          this.authService.saveTokenToStorage(token);
         })
       );
   }
@@ -45,9 +48,11 @@ export class UserService {
       .post<RegisterResponse>(`${BASE_URL}/users/register`, newUser)
       .pipe(
         tap((resp) => {
+          const { token } = resp;
           const { name, surname } = resp.user;
           const nameAndSurname = `${name} ${surname}`;
           this.authService.saveNameAndSurnameToStorage(nameAndSurname);
+          this.authService.saveTokenToStorage(token);
         })
       );
   }
