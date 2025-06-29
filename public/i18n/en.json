@@ -43,6 +43,7 @@
     "email": "The field is not a valid email",
     "required": "The field is required",
     "other": "Undefined error",
-    "emailTaken": "User is not available"
+    "emailTaken": "User is not available",
+    "distinctPasswd": "Passwords do not match"
   }
 }

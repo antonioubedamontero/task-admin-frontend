@@ -43,6 +43,7 @@
     "email": "El campo no es un email válido",
     "required": "El campo es obligatorio",
     "other": "Error no definido",
-    "emailTaken": "Usuario no disponible"
+    "emailTaken": "Usuario no disponible",
+    "distinctPasswd": "Las contraseñas no coinciden"
   }
 }

@@ -4,6 +4,7 @@ import {
   inject,
   OnDestroy,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
@@ -13,7 +14,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormService } from '../../../shared/services';
 import { UserService } from '../../services';
 import { LoginRequest } from '../../interfaces';
-import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [TranslateModule, ReactiveFormsModule],

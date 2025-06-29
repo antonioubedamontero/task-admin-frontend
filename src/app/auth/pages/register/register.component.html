@@ -1,4 +1,4 @@
-<form class="form" (ngSubmit)="submitRegister()">
+<form class="form" [formGroup]="registerForm" (ngSubmit)="submitRegister()">
   <div id="form-register-title">
     <h1 class="form-title">
       {{ "register.title" | translate }}
@@ -7,7 +7,7 @@
 
   <hr class="my-4 text-gray-400" />
 
-  <section id="form-register-data" [formGroup]="registerForm">
+  <section id="form-register-data">
     <div class="form-group">
       <label class="font-medium" for="email">
         {{ "register.form.email.title" | translate }}
@@ -107,6 +107,12 @@
         }
       </div>
     </div>
+
+    @if (registerForm.hasError('distinctPasswd')) {
+    <div class="text-center form-input-error-msg">
+      {{ "errors.distinctPasswd" | translate }}
+    </div>
+    }
 
     <div class="form-group">
       <button
