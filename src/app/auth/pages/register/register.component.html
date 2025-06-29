@@ -1,1 +1,127 @@
-<p>register works!</p>,
+<form class="form" [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+  <div id="form-register-title">
+    <h1 class="form-title">
+      {{ "register.title" | translate }}
+    </h1>
+  </div>
+
+  <hr class="my-4 text-gray-400" />
+
+  <section id="form-register-data">
+    <div class="form-group">
+      <label class="font-medium" for="email">
+        {{ "register.form.email.title" | translate }}
+      </label>
+      <div class="form-input-group">
+        <input
+          class="input-field"
+          type="email"
+          id="email"
+          formControlName="email"
+          [placeholder]="'register.form.email.placeholder' | translate"
+        />
+        @if (formService.hasControlErrors(registerForm, 'email')) {
+        <span class="form-input-error-msg">
+          {{ formService.getFormControlErrors(registerForm, "email") }}
+        </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="font-medium" for="name">
+        {{ "register.form.name.title" | translate }}
+      </label>
+      <div class="form-input-group">
+        <input
+          class="input-field"
+          type="name"
+          id="name"
+          formControlName="name"
+          [placeholder]="'register.form.name.placeholder' | translate"
+        />
+        @if (formService.hasControlErrors(registerForm, 'name')) {
+        <span class="form-input-error-msg">
+          {{ formService.getFormControlErrors(registerForm, "name") }}
+        </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="font-medium" for="surname">
+        {{ "register.form.surname.title" | translate }}
+      </label>
+      <div class="form-input-group">
+        <input
+          class="input-field"
+          type="surname"
+          id="surname"
+          formControlName="surname"
+          [placeholder]="'register.form.surname.placeholder' | translate"
+        />
+        @if (formService.hasControlErrors(registerForm, 'surname')) {
+        <span class="form-input-error-msg">
+          {{ formService.getFormControlErrors(registerForm, "surname") }}
+        </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="font-medium" for="password">
+        {{ "register.form.password.title" | translate }}
+      </label>
+      <div class="form-input-group">
+        <input
+          class="input-field"
+          type="password"
+          id="password"
+          formControlName="password"
+          [placeholder]="'register.form.password.placeholder' | translate"
+        />
+        @if (formService.hasControlErrors(registerForm, 'password')) {
+        <span class="form-input-error-msg">
+          {{ formService.getFormControlErrors(registerForm, "password") }}
+        </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="font-medium" for="repeatPassword">
+        {{ "register.form.repeatPassword.title" | translate }}
+      </label>
+      <div class="form-input-group">
+        <input
+          class="input-field"
+          type="password"
+          id="repeatPassword"
+          formControlName="repeatPassword"
+          [placeholder]="'register.form.repeatPassword.placeholder' | translate"
+        />
+        @if (formService.hasControlErrors(registerForm, 'repeatPassword')) {
+        <span class="form-input-error-msg">
+          {{ formService.getFormControlErrors(registerForm, "repeatPassword") }}
+        </span>
+        }
+      </div>
+    </div>
+
+    @if (registerForm.hasError('distinctPasswd')) {
+    <div class="text-center form-input-error-msg">
+      {{ "errors.distinctPasswd" | translate }}
+    </div>
+    }
+
+    <div class="form-group">
+      <button
+        [disabled]="registerForm.invalid"
+        class="blue-button"
+        type="submit"
+      >
+        {{ "register.registerButton" | translate }}
+      </button>
+    </div>
+  </section>
+</form>

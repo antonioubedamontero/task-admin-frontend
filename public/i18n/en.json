@@ -1,0 +1,49 @@
+{
+  "login": {
+    "title": "Login",
+    "form": {
+      "email": {
+        "title": "* Email",
+        "placeholder": "example@domain.com"
+      },
+      "password": {
+        "title": "* Password",
+        "placeholder": "123456"
+      }
+    },
+    "loginButton": "Login"
+  },
+  "register": {
+    "title": "User registration",
+    "form": {
+      "email": {
+        "title": "*Email",
+        "placeholder": "example@domain.com"
+      },
+      "name": {
+        "title": "*Name",
+        "placeholder": "John"
+      },
+      "surname": {
+        "title": "*Last name",
+        "placeholder": "Doe"
+      },
+      "password": {
+        "title": "*Password",
+        "placeholder": "a43$b1E5AqoP"
+      },
+      "repeatPassword": {
+        "title": "*Repeat Password",
+        "placeholder": "a43$b1E5AqoP"
+      }
+    },
+    "registerButton": "User registration"
+  },
+  "errors": {
+    "email": "The field is not a valid email",
+    "required": "The field is required",
+    "other": "Undefined error",
+    "emailTaken": "User is not available",
+    "distinctPasswd": "Passwords do not match"
+  }
+}

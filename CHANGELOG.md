@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2025-06-29
+
+- Added and configured ngx translate.
+- Added Montserrat font.
+- Login page.
+- Register page.
+- Added user service.
+- Added interfaces.
+- Added auth service.
+- Added form service.
+- Added Guars: authGuard and loginOrRegisterGuard.
+- Added interceptor to add Authorization header.
+
 ## [0.2.0] - 2025-06-24
 
 - Create development and production environments.

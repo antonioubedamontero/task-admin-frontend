@@ -1,2 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+@layer components {
+  .form-title {
+    @apply pt-2 text-blue-700 text-center font-bold;
+  }
+
+  .form {
+    @apply bg-white p-4 border-1 border-gray-300 rounded;
+  }
+
+  .form-group {
+    @apply flex flex-row gap-5 justify-between items-center;
+  }
+
+  .form-input-group {
+    @apply flex flex-col mb-2;
+  }
+
+  .form-input-error-msg {
+    @apply text-sm text-red-600;
+  }
+
+  .blue-button {
+    @apply my-4 p-2 w-full bg-blue-500 disabled:bg-gray-400 text-white rounded ring hover:ring-gray-500;
+  }
+
+  .input-field {
+    @apply my-2 border-1 p-1 border-gray-300 rounded;
+  }
+}

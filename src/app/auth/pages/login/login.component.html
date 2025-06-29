@@ -1,0 +1,57 @@
+<form class="form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+  <div id="form-login-title">
+    <h1 class="form-title">
+      {{ "login.title" | translate }}
+    </h1>
+  </div>
+
+  <hr class="my-4 text-gray-400" />
+
+  <section id="form-login-data">
+    <div class="form-group">
+      <label class="font-medium" for="email">
+        {{ "login.form.email.title" | translate }}
+      </label>
+      <div class="form-input-group">
+        <input
+          class="input-field"
+          type="email"
+          id="email"
+          formControlName="email"
+          [placeholder]="'login.form.email.placeholder' | translate"
+        />
+        @if (formService.hasControlErrors(loginForm, 'email')) {
+        <span class="form-input-error-msg">
+          {{ formService.getFormControlErrors(loginForm, "email") }}
+        </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="font-medium" for="password">
+        {{ "login.form.password.title" | translate }}
+      </label>
+      <div class="form-input-group">
+        <input
+          class="input-field"
+          type="password"
+          id="password"
+          formControlName="password"
+          [placeholder]="'login.form.password.placeholder' | translate"
+        />
+        @if (formService.hasControlErrors(loginForm, 'password')) {
+        <span class="form-input-error-msg">
+          {{ formService.getFormControlErrors(loginForm, "password") }}
+        </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button [disabled]="loginForm.invalid" class="blue-button" type="submit">
+        {{ "login.loginButton" | translate }}
+      </button>
+    </div>
+  </section>
+</form>
