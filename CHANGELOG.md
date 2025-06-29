@@ -2,13 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.0] - 2025-06-24
+## [0.3.0] - 2025-06-29
 
+- Added and configured ngx translate.
+- Added Montserrat font.
 - Login page.
 - Register page.
-- Added Montserrat font.
-- Added user services and interfaces.
-- Added and configured ngx translate.
+- Added user service.
+- Added interfaces related to user service.
+- Added auth service.
+- Added form service.
 
 ## [0.2.0] - 2025-06-24
 

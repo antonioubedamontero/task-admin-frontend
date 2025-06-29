@@ -1,11 +1,37 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
+import { FormService } from '../../services';
+
 @Component({
   selector: 'app-register',
-  imports: [TranslateModule],
+  imports: [TranslateModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class RegisterComponent {}
+export default class RegisterComponent {
+  private fb = inject(FormBuilder);
+  formService = inject(FormService);
+
+  registerForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    name: ['', [Validators.required]],
+    surname: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+    repeatPassword: ['', [Validators.required]],
+  });
+
+  submitRegister(): void {
+    if (this.registerForm.errors) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
+    const { repeatPassword, ...data } = this.registerForm.value;
+
+    // TODO: Process valid register request
+    console.log('form data', data);
+  }
+}

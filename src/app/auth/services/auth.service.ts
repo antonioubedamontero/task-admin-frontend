@@ -1,39 +1,43 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 
-import { Observable } from 'rxjs';
-
-import { environment } from '../../../environments/environment';
-import {
-  LoginRequest,
-  LoginResponse,
-  RegisterRequest,
-  RegisterResponse,
-  UserAvailabilityResponse,
-} from '../interfaces';
-
-const BASE_URL = environment.BASE_URL;
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private http = inject(HttpClient);
+  token?: string;
+  nameAndSurname = signal<string>('');
 
-  getUserAvailability(email: string): Observable<UserAvailabilityResponse> {
-    return this.http.get<UserAvailabilityResponse>(
-      `${BASE_URL}/users/${email}/taken`
-    );
+  userService = inject(UserService);
+
+  constructor() {
+    // Persist token and name and surname
+    this.getTokenFromStorage();
+    this.getNameSurnameFromStorage();
   }
 
-  login(userLogin: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${BASE_URL}/users/login`, userLogin);
+  saveTokenToStorage(token: string): void {
+    if (!token) return;
+    this.token = token;
+    localStorage.setItem('token', token);
   }
 
-  register(newUser: RegisterRequest): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(
-      `${BASE_URL}/users/register`,
-      newUser
-    );
+  getTokenFromStorage(): void {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    this.token = token;
+  }
+
+  saveNameAndSurnameToStorage(nameSurname: string): void {
+    if (!nameSurname) return;
+    this.nameAndSurname.set(nameSurname);
+    localStorage.setItem('nameAndSurname', nameSurname);
+  }
+
+  getNameSurnameFromStorage(): void {
+    const nameSurname = localStorage.getItem('nameAndSurname');
+    if (!nameSurname) return;
+    this.nameAndSurname.set(nameSurname);
   }
 }

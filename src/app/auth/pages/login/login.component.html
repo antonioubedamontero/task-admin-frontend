@@ -1,37 +1,51 @@
-<form id="form-login" class="form">
+<form class="form" (ngSubmit)="submitLogin()">
   <div id="form-login-title">
-    <h1 class="pt-2 text-blue-700 text-center font-bold">
+    <h1 class="form-title">
       {{ "login.title" | translate }}
     </h1>
   </div>
 
   <hr class="my-4 text-gray-400" />
 
-  <section id="form-login-data">
+  <section id="form-login-data" [formGroup]="loginForm">
     <div class="form-group">
       <label class="font-medium" for="email">
         {{ "login.form.email.title" | translate }}
       </label>
-      <input
-        class="input-field"
-        type="email"
-        id="email"
-        name="email"
-        [placeholder]="'login.form.email.placeholder' | translate"
-      />
+      <div class="form-input-group">
+        <input
+          class="input-field"
+          type="email"
+          id="email"
+          formControlName="email"
+          [placeholder]="'login.form.email.placeholder' | translate"
+        />
+        @if (formService.hasControlErrors(loginForm, 'email')) {
+        <span class="form-input-error-msg">
+          {{ formService.getFormControlErrors(loginForm, "email") }}
+        </span>
+        }
+      </div>
     </div>
 
     <div class="form-group">
       <label class="font-medium" for="password">
         {{ "login.form.password.title" | translate }}
       </label>
-      <input
-        class="input-field"
-        type="password"
-        id="password"
-        name="password"
-        [placeholder]="'login.form.password.placeholder' | translate"
-      />
+      <div class="form-input-group">
+        <input
+          class="input-field"
+          type="password"
+          id="password"
+          formControlName="password"
+          [placeholder]="'login.form.password.placeholder' | translate"
+        />
+        @if (formService.hasControlErrors(loginForm, 'password')) {
+        <span class="form-input-error-msg">
+          {{ formService.getFormControlErrors(loginForm, "password") }}
+        </span>
+        }
+      </div>
     </div>
 
     <div class="form-group">
