@@ -30,6 +30,10 @@ body {
     @apply my-4 p-2 w-full bg-blue-500 disabled:bg-gray-400 text-white rounded ring hover:ring-gray-500;
   }
 
+  .logout-button {
+    @apply font-bold p-2 bg-emerald-500 text-white rounded hover:bg-emerald-400;
+  }
+
   .input-field {
     @apply my-2 border-1 p-1 border-gray-300 rounded;
   }

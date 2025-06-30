@@ -39,6 +39,19 @@
     },
     "registerButton": "User registration"
   },
+  "taskDetails": {
+    "title": "Task Details"
+  },
+  "newTask": {
+    "title": "New Task"
+  },
+  "updateTask": {
+    "title": "Update Task"
+  },
+  "tasks": {
+    "title": "{{name}}'s Tasks"
+  },
+  "logout": "Logout",
   "errors": {
     "email": "The field is not a valid email",
     "required": "The field is required",

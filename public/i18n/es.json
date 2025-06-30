@@ -39,6 +39,19 @@
     },
     "registerButton": "Alta de usuario"
   },
+  "taskDetails": {
+    "title": "Detalles de la tarea"
+  },
+  "newTask": {
+    "title": "Nueva tarea"
+  },
+  "updateTask": {
+    "title": "Actualizar tarea"
+  },
+  "tasks": {
+    "title": "Tareas de {{name}}"
+  },
+  "logout": "Salir",
   "errors": {
     "email": "El campo no es un email válido",
     "required": "El campo es obligatorio",

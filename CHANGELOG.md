@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2025-06-30
+
+- Header component.
+- Show header title in tasks components.
+- Remove task by state.
+- Install lucide icons library.
+- Task list.
+
 ## [0.3.0] - 2025-06-29
 
 - Added and configured ngx translate.

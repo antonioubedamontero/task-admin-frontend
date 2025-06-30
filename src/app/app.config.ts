@@ -16,6 +16,7 @@ import { routes } from './app.routes';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { LucideAngularModule, LogOut } from 'lucide-angular';
 
 import { authInterceptor } from './auth/interceptors/auth.interceptor';
 
@@ -38,5 +39,6 @@ export const appConfig: ApplicationConfig = {
         },
       }),
     ]),
+    importProvidersFrom(LucideAngularModule.pick({ LogOut })),
   ],
 };
