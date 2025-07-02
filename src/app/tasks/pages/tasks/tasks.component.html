@@ -1,7 +1,34 @@
-<p>
-  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel commodi magnam
-  voluptas blanditiis voluptatem omnis molestiae doloribus? Eveniet harum
-  impedit ipsum, voluptates a inventore cupiditate id, explicabo nostrum eos,
-  voluptatum officia illo. Suscipit, culpa et. Dignissimos culpa animi error
-  velit!
-</p>
+<section
+  class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
+>
+  <app-mini-task-by-category
+    [title]="'tasks.taskStates.CREATED' | translate"
+    [state]="taskState.CREATED"
+    [taskItems]="taskItems"
+  />
+
+  <app-mini-task-by-category
+    [title]="'tasks.taskStates.STARTED' | translate"
+    [state]="taskState.STARTED"
+    [taskItems]="taskItems"
+  />
+
+  <app-mini-task-by-category
+    [title]="'tasks.taskStates.PAUSED' | translate"
+    [state]="taskState.PAUSED"
+    [taskItems]="taskItems"
+  />
+
+  <app-mini-task-by-category
+    class="hidden xl:block"
+    [title]="'tasks.taskStates.CANCELED' | translate"
+    [state]="taskState.CANCELED"
+    [taskItems]="taskItems"
+  />
+
+  <app-mini-task-by-category
+    [title]="'tasks.taskStates.ENDED' | translate"
+    [state]="taskState.ENDED"
+    [taskItems]="taskItems"
+  />
+</section>

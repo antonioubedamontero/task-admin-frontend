@@ -49,7 +49,18 @@
     "title": "Actualizar tarea"
   },
   "tasks": {
-    "title": "Tareas de {{name}}"
+    "title": "Tareas de {{name}}",
+    "taskStates": {
+      "created": "Creada",
+      "started": "Iniciada",
+      "paused": "Detenida",
+      "canceled": "Cancelada",
+      "ended": "Finalizada"
+    }
+  },
+  "miniTask": {
+    "startDate": "Fecha inicio:",
+    "dueDate": "Fecha fin:"
   },
   "logout": "Salir",
   "errors": {

@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 - Remove task by state.
 - Install lucide icons library.
 - Task list.
+- Task service.
+- Group css by styles.
 
 ## [0.3.0] - 2025-06-29
 

@@ -1,0 +1,15 @@
+.blue-button {
+  @apply p-1 bg-blue-500  text-white rounded hover:bg-blue-400;
+}
+
+.green-button {
+  @apply p-1 bg-green-500  text-white rounded hover:bg-green-400;
+}
+
+.red-button {
+  @apply p-1 bg-red-500  text-white rounded hover:bg-red-400;
+}
+
+.logout-button {
+  @apply p-1 bg-emerald-500  text-white rounded hover:bg-emerald-400;
+}

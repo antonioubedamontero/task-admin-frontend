@@ -49,7 +49,11 @@
     </div>
 
     <div class="form-group">
-      <button [disabled]="loginForm.invalid" class="blue-button" type="submit">
+      <button
+        [disabled]="loginForm.invalid"
+        class="w-full blue-button"
+        type="submit"
+      >
         {{ "login.loginButton" | translate }}
       </button>
     </div>

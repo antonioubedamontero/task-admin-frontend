@@ -49,7 +49,18 @@
     "title": "Update Task"
   },
   "tasks": {
-    "title": "{{name}}'s Tasks"
+    "title": "{{name}}'s Tasks",
+    "taskStates": {
+      "created": "Created",
+      "started": "Started",
+      "paused": "Paused",
+      "canceled": "Canceled",
+      "ended": "Finished"
+    }
+  },
+  "miniTask": {
+    "startDate": "Start date:",
+    "dueDate": "Due date:"
   },
   "logout": "Logout",
   "errors": {
