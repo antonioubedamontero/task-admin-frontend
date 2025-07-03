@@ -20,7 +20,7 @@ export class FormService {
       return '';
     }
 
-    let errors: string[] = [];
+    const errors: string[] = [];
     Object.keys(control.errors).forEach((errorKey) => {
       const genericError = this.translate.instant('errors.other');
       const error = this.translate.instant(`errors.${errorKey}`);

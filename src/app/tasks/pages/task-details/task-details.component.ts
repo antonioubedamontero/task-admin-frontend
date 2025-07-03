@@ -11,8 +11,7 @@ import { headerTitle$ } from '../../components/header/header.component';
 export default class TaskDetailsComponent {
   translate = inject(TranslateService);
 
-  ngOnInit(): void {
-    // TODO: Try to avoid this life cycle
+  constructor() {
     const headerTitle = this.translate.instant('taskDetails.title');
     headerTitle$.next(headerTitle);
   }

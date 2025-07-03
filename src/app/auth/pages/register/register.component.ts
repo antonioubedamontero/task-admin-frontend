@@ -1,12 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
-  OnDestroy,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { FormService } from '../../../shared/services';
@@ -14,21 +13,21 @@ import { EmailTakenValidator, matchPasswordsValidator } from '../../validators';
 import { UserService } from '../../services';
 import { RegisterRequest } from '../../interfaces';
 import { Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-register',
   imports: [TranslateModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class RegisterComponent implements OnDestroy {
+export default class RegisterComponent {
   private fb = inject(FormBuilder);
   private emailTakenValidator = inject(EmailTakenValidator);
   private userService = inject(UserService);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   formService = inject(FormService);
-
-  private subscriptions: Subscription[] = [];
 
   registerForm = this.fb.group(
     {
@@ -45,18 +44,12 @@ export default class RegisterComponent implements OnDestroy {
     { validators: matchPasswordsValidator }
   );
 
-  ngOnDestroy(): void {
-    // TODO: View if can avoid this life cycle hook
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
-
   submitRegister(): void {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
 
-    // TODO: Process valid register request
     const { email, name, surname, password } = this.registerForm.value;
     const registerReq: RegisterRequest = {
       email: email!,
@@ -69,11 +62,12 @@ export default class RegisterComponent implements OnDestroy {
 
   sendRegisterRequest(newUser: RegisterRequest): void {
     // TODO: Show dialog message if error produced
-    const subscription = this.userService.register(newUser).subscribe({
-      next: (resp) => this.router.navigateByUrl('/tasks'),
-      error: (err) => console.error('Error registering user'),
-    });
-
-    this.subscriptions.push(subscription);
+    this.userService
+      .register(newUser)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => this.router.navigateByUrl('/tasks'),
+        error: (error) => console.error('Error registering user'),
+      });
   }
 }

@@ -56,7 +56,8 @@
       "paused": "Paused",
       "canceled": "Canceled",
       "ended": "Finished"
-    }
+    },
+    "noTasks": "No tasks"
   },
   "miniTask": {
     "startDate": "Start date:",

@@ -1,34 +1,39 @@
 <section
-  class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
+  class="grid grid-cols-1 border-1 border-gray-400 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
 >
   <app-mini-task-by-category
+    class="border-1 border-gray-400"
     [title]="'tasks.taskStates.CREATED' | translate"
     [state]="taskState.CREATED"
-    [taskItems]="taskItems"
+    [taskItems]="createdTaskResouce.value() ?? []"
   />
 
+  <!-- -->
   <app-mini-task-by-category
+    class="border-1 border-gray-400"
     [title]="'tasks.taskStates.STARTED' | translate"
     [state]="taskState.STARTED"
-    [taskItems]="taskItems"
+    [taskItems]="startedTaskResouce.value() ?? []"
   />
-
+  <!-- -->
   <app-mini-task-by-category
+    class="border-1 border-gray-400"
     [title]="'tasks.taskStates.PAUSED' | translate"
     [state]="taskState.PAUSED"
-    [taskItems]="taskItems"
+    [taskItems]="pausedTaskResouce.value() ?? []"
   />
-
+  <!-- -->
   <app-mini-task-by-category
-    class="hidden xl:block"
+    class="hidden xl:block xl:border-1 xl:border-gray-400"
     [title]="'tasks.taskStates.CANCELED' | translate"
     [state]="taskState.CANCELED"
-    [taskItems]="taskItems"
+    [taskItems]="canceledTaskResouce.value() ?? []"
   />
-
+  <!-- -->
   <app-mini-task-by-category
+    class="border-1 border-gray-400"
     [title]="'tasks.taskStates.ENDED' | translate"
     [state]="taskState.ENDED"
-    [taskItems]="taskItems"
+    [taskItems]="endedTaskResouce.value() ?? []"
   />
 </section>
