@@ -1,1 +1,39 @@
-<p>tasks works!</p>,
+<section
+  class="grid grid-cols-1 border-1 border-gray-400 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
+>
+  <app-mini-task-by-category
+    class="border-1 border-gray-400"
+    [title]="'tasks.taskStates.CREATED' | translate"
+    [state]="taskState.CREATED"
+    [taskItems]="createdTaskResouce.value() ?? []"
+  />
+
+  <!-- -->
+  <app-mini-task-by-category
+    class="border-1 border-gray-400"
+    [title]="'tasks.taskStates.STARTED' | translate"
+    [state]="taskState.STARTED"
+    [taskItems]="startedTaskResouce.value() ?? []"
+  />
+  <!-- -->
+  <app-mini-task-by-category
+    class="border-1 border-gray-400"
+    [title]="'tasks.taskStates.PAUSED' | translate"
+    [state]="taskState.PAUSED"
+    [taskItems]="pausedTaskResouce.value() ?? []"
+  />
+  <!-- -->
+  <app-mini-task-by-category
+    class="hidden xl:block xl:border-1 xl:border-gray-400"
+    [title]="'tasks.taskStates.CANCELED' | translate"
+    [state]="taskState.CANCELED"
+    [taskItems]="canceledTaskResouce.value() ?? []"
+  />
+  <!-- -->
+  <app-mini-task-by-category
+    class="border-1 border-gray-400"
+    [title]="'tasks.taskStates.ENDED' | translate"
+    [state]="taskState.ENDED"
+    [taskItems]="endedTaskResouce.value() ?? []"
+  />
+</section>

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2025-07-01
+
+- Header component.
+- Show header title in tasks components.
+- Remove task by state.
+- Install lucide icons library.
+- Task list, mini-task and mini-task-by-category.
+- Task service to access tasks api endpoints.
+- Group css by styles.
+
 ## [0.3.0] - 2025-06-29
 
 - Added and configured ngx translate.

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
-import { HeaderComponent } from '../../shared/components/header/header.component';
+import { HeaderComponent } from '../../components/header/header.component';
 
 const components = [HeaderComponent];
 @Component({

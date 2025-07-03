@@ -39,6 +39,31 @@
     },
     "registerButton": "User registration"
   },
+  "taskDetails": {
+    "title": "Task Details"
+  },
+  "newTask": {
+    "title": "New Task"
+  },
+  "updateTask": {
+    "title": "Update Task"
+  },
+  "tasks": {
+    "title": "{{name}}'s Tasks",
+    "taskStates": {
+      "created": "Created",
+      "started": "Started",
+      "paused": "Paused",
+      "canceled": "Canceled",
+      "ended": "Finished"
+    },
+    "noTasks": "No tasks"
+  },
+  "miniTask": {
+    "startDate": "Start date:",
+    "dueDate": "Due date:"
+  },
+  "logout": "Logout",
   "errors": {
     "email": "The field is not a valid email",
     "required": "The field is required",

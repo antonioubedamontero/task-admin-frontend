@@ -1,29 +1,30 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
-  OnDestroy,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { FormService } from '../../../shared/services';
 import { UserService } from '../../services';
 import { LoginRequest } from '../../interfaces';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-login',
   imports: [TranslateModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class LoginComponent implements OnDestroy {
+export default class LoginComponent {
   private fb = inject(FormBuilder);
   private userService = inject(UserService);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   formService = inject(FormService);
 
@@ -31,13 +32,6 @@ export default class LoginComponent implements OnDestroy {
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   });
-
-  subscriptions: Subscription[] = [];
-
-  ngOnDestroy(): void {
-    // TODO: Review if should avoid
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
 
   submitLogin(): void {
     if (this.loginForm.invalid) {
@@ -53,17 +47,18 @@ export default class LoginComponent implements OnDestroy {
   }
 
   sendLoginRequest(userLogin: LoginRequest): void {
-    const subscription = this.userService.login(userLogin).subscribe({
-      next: ({ token }) => {
-        if (token) {
-          this.router.navigateByUrl('/tasks');
-        }
-      },
-      error: (error) => {
-        // TODO: Send modal notification to user
-      },
-    });
-
-    this.subscriptions.push(subscription);
+    this.userService
+      .login(userLogin)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: ({ token }) => {
+          if (token) {
+            this.router.navigateByUrl('/tasks');
+          }
+        },
+        error: (error) => {
+          // TODO: Send modal notification to user
+        },
+      });
   }
 }

@@ -1,0 +1,11 @@
+<header
+  class="py-2 px-4 bg-sky-700 text-white font-bold w-full flex items-center justify-between"
+>
+  <h1 class="flex-1 text-center">
+    {{ headerTitle() }}
+  </h1>
+  <button (click)="logout()" class="flex gap-2 logout-button">
+    <lucide-icon name="log-out"></lucide-icon>
+    <span>{{ "logout" | translate }}</span>
+  </button>
+</header>

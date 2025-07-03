@@ -39,6 +39,31 @@
     },
     "registerButton": "Alta de usuario"
   },
+  "taskDetails": {
+    "title": "Detalles de la tarea"
+  },
+  "newTask": {
+    "title": "Nueva tarea"
+  },
+  "updateTask": {
+    "title": "Actualizar tarea"
+  },
+  "tasks": {
+    "title": "Tareas de {{name}}",
+    "taskStates": {
+      "created": "Creada",
+      "started": "Iniciada",
+      "paused": "Detenida",
+      "canceled": "Cancelada",
+      "ended": "Finalizada"
+    },
+    "noTasks": "Sin tareas"
+  },
+  "miniTask": {
+    "startDate": "Fecha inicio:",
+    "dueDate": "Fecha fin:"
+  },
+  "logout": "Salir",
   "errors": {
     "email": "El campo no es un email válido",
     "required": "El campo es obligatorio",
