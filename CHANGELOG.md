@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2025-07-03
+
+- Add error and success modal messages.
+- Integrate login and register error messages.
+
 ## [0.4.0] - 2025-07-01
 
 - Header component.

@@ -11,7 +11,10 @@
         "placeholder": "123456"
       }
     },
-    "loginButton": "Login"
+    "loginButton": "Login",
+    "dialogMessageError": {
+      "title": "Error logging in"
+    }
   },
   "register": {
     "title": "User registration",
@@ -37,7 +40,10 @@
         "placeholder": "a43$b1E5AqoP"
       }
     },
-    "registerButton": "User registration"
+    "registerButton": "User registration",
+    "dialogMessageError": {
+      "title": "Error registering user"
+    }
   },
   "taskDetails": {
     "title": "Task Details"
@@ -64,6 +70,10 @@
     "dueDate": "Due date:"
   },
   "logout": "Logout",
+  "modalUserFeedback": {
+    "defaultTitle": "Operation completed successfully",
+    "defaultCloseBtnTitle": "Close"
+  },
   "errors": {
     "email": "The field is not a valid email",
     "required": "The field is required",

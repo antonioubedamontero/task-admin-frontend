@@ -125,3 +125,12 @@
     </div>
   </section>
 </form>
+
+@if (isErrorModal()) {
+<app-modal-user-feedback
+  [modalType]="modelUserFeedbackType.ERROR"
+  [title]="'register.dialogMessageError.title' | translate"
+  [description]="errorText()"
+  (closeModal)="isErrorModal.set(false)"
+/>
+}

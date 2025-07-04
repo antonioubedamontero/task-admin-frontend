@@ -22,6 +22,9 @@ import {
   Eye,
   Pencil,
   Trash,
+  CircleCheck,
+  CircleX,
+  CircleAlert,
 } from 'lucide-angular';
 
 import { authInterceptor } from './auth/interceptors/auth.interceptor';
@@ -46,7 +49,15 @@ export const appConfig: ApplicationConfig = {
       }),
     ]),
     importProvidersFrom(
-      LucideAngularModule.pick({ LogOut, Eye, Pencil, Trash })
+      LucideAngularModule.pick({
+        LogOut,
+        Eye,
+        Pencil,
+        Trash,
+        CircleCheck,
+        CircleX,
+        CircleAlert,
+      })
     ),
   ],
 };

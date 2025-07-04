@@ -11,7 +11,10 @@
         "placeholder": "123456"
       }
     },
-    "loginButton": "Entrar"
+    "loginButton": "Entrar",
+    "dialogMessageError": {
+      "title": "Error al realizar el login"
+    }
   },
   "register": {
     "title": "Alta de usuario",
@@ -37,7 +40,10 @@
         "placeholder": "a43$b1E5AqoP"
       }
     },
-    "registerButton": "Alta de usuario"
+    "registerButton": "Alta de usuario",
+    "dialogMessageError": {
+      "title": "Error al realizar el registro"
+    }
   },
   "taskDetails": {
     "title": "Detalles de la tarea"
@@ -64,6 +70,10 @@
     "dueDate": "Fecha fin:"
   },
   "logout": "Salir",
+  "modalUserFeedback": {
+    "defaultTitle": "Operación realizada correctamente",
+    "defaultCloseBtnTitle": "Cerrar"
+  },
   "errors": {
     "email": "El campo no es un email válido",
     "required": "El campo es obligatorio",
