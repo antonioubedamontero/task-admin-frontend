@@ -18,6 +18,7 @@
   },
   "register": {
     "title": "Alta de usuario",
+    "addTaskBtn": "Agregar tarea",
     "form": {
       "email": {
         "title": "* Email",

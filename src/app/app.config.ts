@@ -25,9 +25,23 @@ import {
   CircleCheck,
   CircleX,
   CircleAlert,
+  Plus,
+  ArrowLeft,
 } from 'lucide-angular';
 
 import { authInterceptor } from './auth/interceptors/auth.interceptor';
+
+const lucideIcons = {
+  LogOut,
+  Eye,
+  Pencil,
+  Trash,
+  CircleCheck,
+  CircleX,
+  CircleAlert,
+  Plus,
+  ArrowLeft,
+};
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -48,16 +62,6 @@ export const appConfig: ApplicationConfig = {
         },
       }),
     ]),
-    importProvidersFrom(
-      LucideAngularModule.pick({
-        LogOut,
-        Eye,
-        Pencil,
-        Trash,
-        CircleCheck,
-        CircleX,
-        CircleAlert,
-      })
-    ),
+    importProvidersFrom(LucideAngularModule.pick({ ...lucideIcons })),
   ],
 };

@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-
-import { headerTitle$ } from '../../components/header/header.component';
-
+import { HeaderService } from '../../services';
 @Component({
   selector: 'app-new-task',
   imports: [TranslateModule],
@@ -12,9 +10,11 @@ import { headerTitle$ } from '../../components/header/header.component';
 })
 export default class NewTaskComponent {
   translate = inject(TranslateService);
+  headerService = inject(HeaderService);
 
   constructor() {
     const headerTitle = this.translate.instant('newTask.title');
-    headerTitle$.next(headerTitle);
+    this.headerService.setTitle(headerTitle);
+    this.headerService.showBackBtn = true;
   }
 }

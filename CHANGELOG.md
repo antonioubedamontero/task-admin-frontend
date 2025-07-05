@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0] - 2025-07-05
+
+- New task form added.
+- Added header service with title and back button features.
+- Added create task in tasks page.
+- Some minnor css changes.
+
 ## [0.5.0] - 2025-07-03
 
 - Add error and success modal messages.

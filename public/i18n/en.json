@@ -18,6 +18,7 @@
   },
   "register": {
     "title": "User registration",
+    "addTaskBtn": "Add task",
     "form": {
       "email": {
         "title": "*Email",

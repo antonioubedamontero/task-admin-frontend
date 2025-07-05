@@ -1,6 +1,12 @@
 <header
   class="py-2 px-4 bg-sky-700 text-white font-bold w-full flex items-center justify-between"
 >
+  @if(this.headerService.isBackBtnShow) {
+  <button (click)="this.headerService.navigateBack()">
+    <lucide-icon name="arrow-left"></lucide-icon>
+  </button>
+  }
+
   <h1 class="flex-1 text-center">
     {{ headerTitle() }}
   </h1>
