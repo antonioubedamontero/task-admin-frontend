@@ -3,8 +3,11 @@ import {
   Component,
   DestroyRef,
   inject,
+  signal,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -12,22 +15,26 @@ import { FormService } from '../../../shared/services';
 import { EmailTakenValidator, matchPasswordsValidator } from '../../validators';
 import { UserService } from '../../services';
 import { RegisterRequest } from '../../interfaces';
-import { Router } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ModelUserFeedbackType } from '../../../shared/interfaces';
+import { ModalUserFeedbackComponent } from '../../../shared/components/modal-user-feedback/modal-user-feedback.component';
 @Component({
   selector: 'app-register',
-  imports: [TranslateModule, ReactiveFormsModule],
+  imports: [TranslateModule, ReactiveFormsModule, ModalUserFeedbackComponent],
   templateUrl: './register.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class RegisterComponent {
+  modelUserFeedbackType = ModelUserFeedbackType;
+
   private fb = inject(FormBuilder);
   private emailTakenValidator = inject(EmailTakenValidator);
   private userService = inject(UserService);
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
-
   formService = inject(FormService);
+
+  isErrorModal = signal<boolean>(false);
+  errorText = signal<string>('');
 
   registerForm = this.fb.group(
     {
@@ -61,13 +68,20 @@ export default class RegisterComponent {
   }
 
   sendRegisterRequest(newUser: RegisterRequest): void {
-    // TODO: Show dialog message if error produced
     this.userService
       .register(newUser)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => this.router.navigateByUrl('/tasks'),
-        error: (error) => console.error('Error registering user'),
+        error: (errorResponse) => {
+          this.isErrorModal.set(true);
+          this.errorText.set(errorResponse.error.message);
+        },
       });
+  }
+
+  closeModal(): void {
+    this.isErrorModal.set(false);
+    this.errorText.set('');
   }
 }

@@ -41,7 +41,7 @@ export default class TasksComponent {
       this.taskService.getTasksByState(state).pipe(
         map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
         catchError((error) => {
-          // TODO: Show dialog error message
+          console.error('error retrieving created tasks', error);
           return of([]);
         })
       ),
@@ -53,7 +53,7 @@ export default class TasksComponent {
       this.taskService.getTasksByState(state).pipe(
         map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
         catchError((error) => {
-          // TODO: Show dialog error message
+          console.error('error retrieving started tasks', error);
           return of([]);
         })
       ),
@@ -65,7 +65,7 @@ export default class TasksComponent {
       this.taskService.getTasksByState(state).pipe(
         map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
         catchError((error) => {
-          // TODO: Show dialog error message
+          console.error('error retrieving paused tasks', error);
           return of([]);
         })
       ),
@@ -77,7 +77,7 @@ export default class TasksComponent {
       this.taskService.getTasksByState(state).pipe(
         map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
         catchError((error) => {
-          // TODO: Show dialog error message
+          console.error('error retrieving canceled tasks', error);
           return of([]);
         })
       ),
@@ -90,7 +90,7 @@ export default class TasksComponent {
         takeUntilDestroyed(this.destroyRef),
         map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
         catchError((error) => {
-          // TODO: Show dialog error message
+          console.error('error retrieving ended tasks', error);
           return of([]);
         })
       ),

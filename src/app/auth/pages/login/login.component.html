@@ -59,3 +59,12 @@
     </div>
   </section>
 </form>
+
+@if (isErrorModal()) {
+<app-modal-user-feedback
+  [modalType]="modelUserFeedbackType.ERROR"
+  [title]="'login.dialogMessageError.title' | translate"
+  [description]="errorText()"
+  (closeModal)="isErrorModal.set(false)"
+/>
+}
