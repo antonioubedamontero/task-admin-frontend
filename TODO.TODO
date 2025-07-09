@@ -1,0 +1,2 @@
+General:
+  - Modify form services to get errors from each i18n fields.

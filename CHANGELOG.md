@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - New task form added.
 - Added header service with title and back button features.
 - Added create task in tasks page.
+- Added language in accept-language by interceptor.
 - Some minnor css changes.
 
 ## [0.5.0] - 2025-07-03
