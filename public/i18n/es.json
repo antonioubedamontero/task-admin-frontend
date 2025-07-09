@@ -18,7 +18,6 @@
   },
   "register": {
     "title": "Alta de usuario",
-    "addTaskBtn": "Agregar tarea",
     "form": {
       "email": {
         "title": "* Email",
@@ -50,13 +49,28 @@
     "title": "Detalles de la tarea"
   },
   "newTask": {
-    "title": "Nueva tarea"
+    "title": "Nueva tarea",
+    "addTaskBtn": "Guardar",
+    "form": {
+      "name": {
+        "title": "* Nombre",
+        "placeholder": "Tarea de ejemplo"
+      },
+      "description": {
+        "title": "* Descripción",
+        "placeholder": "Descripción de la tarea"
+      }
+    },
+    "dialogMessageError": {
+      "title": "Error al dar de alta la tarea"
+    }
   },
   "updateTask": {
     "title": "Actualizar tarea"
   },
   "tasks": {
     "title": "Tareas de {{name}}",
+    "addTaskBtn": "Agregar tarea",
     "taskStates": {
       "created": "Creada",
       "started": "Iniciada",

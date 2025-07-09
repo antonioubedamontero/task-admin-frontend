@@ -112,6 +112,7 @@ export default class TasksComponent {
     return tasks.map((task: TaskResponseItem) => {
       const mappedTask: MiniTaskItem = {
         title: task.name,
+        description: task.description,
       };
       if (task.startDate) {
         mappedTask.startDate = task.startDate;
