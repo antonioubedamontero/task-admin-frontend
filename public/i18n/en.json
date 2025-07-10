@@ -84,10 +84,14 @@
     "startDate": "Start date:",
     "dueDate": "End date:"
   },
-  "logout": "Log out",
+  "logout": "Exit",
   "modalUserFeedback": {
-    "defaultTitle": "Operation completed successfully",
-    "defaultCloseBtnTitle": "Close"
+    "defaultSuccessTitle": {
+      "newTask": "New task created"
+    },
+    "defaultCloseBtnTitle": "Close",
+    "defaultSuccessMessage": "Operation completed successfully",
+    "defaultErrorTitle": "An error occurred"
   },
   "errors": {
     "email": "The field is not a valid email",

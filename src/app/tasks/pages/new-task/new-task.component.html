@@ -68,11 +68,11 @@
   </form>
 </div>
 
-@if (isErrorModal()) {
+@if (messageService.isModalShown()) {
 <app-modal-user-feedback
-  [modalType]="modelUserFeedbackType.ERROR"
-  [title]="'newTask.dialogMessageError.title' | translate"
-  [description]="errorText()"
-  (closeModal)="isErrorModal.set(false)"
+  [modalType]="messageService.modalType()"
+  [title]="messageService.modalTitle()"
+  [description]="messageService.modalText()"
+  (closeModal)="closeModal()"
 />
 }

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -16,7 +17,7 @@ import { HeaderService, TaskService } from '../../services';
 import { ModalUserFeedbackComponent } from '../../../shared/components/modal-user-feedback/modal-user-feedback.component';
 import { ModelUserFeedbackType } from '../../../shared/interfaces';
 import { NewTaskRequest } from '../../interfaces';
-import { FormService } from '../../../shared/services';
+import { FormService, MessageService } from '../../../shared/services';
 
 @Component({
   selector: 'app-new-task',
@@ -31,11 +32,8 @@ export default class NewTaskComponent {
   fb = inject(FormBuilder);
   router = inject(Router);
   formService = inject(FormService);
+  messageService = inject(MessageService);
   destroyRef = inject(DestroyRef);
-
-  modelUserFeedbackType = ModelUserFeedbackType;
-  isErrorModal = signal<boolean>(false);
-  errorText = signal<string>('');
 
   constructor() {
     const headerTitle = this.translate.instant('newTask.title');
@@ -66,16 +64,37 @@ export default class NewTaskComponent {
       .addNewTask(newTaskRequest)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: () => this.router.navigateByUrl('/tasks'),
+        next: async () => {
+          const title = this.translate.instant(
+            'modalUserFeedback.defaultSuccessTitle.newTask'
+          );
+          const message = this.translate.instant(
+            'modalUserFeedback.defaultSuccessMessage'
+          );
+          this.messageService.showModal(
+            title,
+            message,
+            ModelUserFeedbackType.success
+          );
+        },
         error: (errorResponse: HttpErrorResponse) => {
-          this.isErrorModal.set(true);
-          this.errorText.set(errorResponse.error.message);
+          const title = this.translate.instant(
+            'modalUserFeedback.defaultErrorTitle'
+          );
+          const message = errorResponse.error.message;
+          this.messageService.showModal(
+            title,
+            message,
+            ModelUserFeedbackType.ERROR
+          );
         },
       });
   }
 
   closeModal(): void {
-    this.isErrorModal.set(false);
-    this.errorText.set('');
+    this.messageService.isModalShown.set(false);
+    if (this.messageService.modalType() === ModelUserFeedbackType.success) {
+      this.router.navigateByUrl('/tasks');
+    }
   }
 }

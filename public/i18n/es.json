@@ -86,8 +86,12 @@
   },
   "logout": "Salir",
   "modalUserFeedback": {
-    "defaultTitle": "Operación realizada correctamente",
-    "defaultCloseBtnTitle": "Cerrar"
+    "defaultSuccessTitle": {
+      "newTask": "Nueva tarea creada"
+    },
+    "defaultCloseBtnTitle": "Cerrar",
+    "defaultSuccessMessage": "Operación realizada correctamente",
+    "defaultErrorTitle": "Se ha producido un error"
   },
   "errors": {
     "email": "El campo no es un email válido",
