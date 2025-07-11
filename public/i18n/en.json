@@ -87,7 +87,8 @@
   "logout": "Exit",
   "modalUserFeedback": {
     "defaultSuccessTitle": {
-      "newTask": "New task created"
+      "newTask": "New task created",
+      "deleteTask": "Task has been deleted successfully"
     },
     "defaultCloseBtnTitle": "Close",
     "defaultSuccessMessage": "Operation completed successfully",

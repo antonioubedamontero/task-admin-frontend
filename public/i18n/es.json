@@ -87,7 +87,8 @@
   "logout": "Salir",
   "modalUserFeedback": {
     "defaultSuccessTitle": {
-      "newTask": "Nueva tarea creada"
+      "newTask": "Nueva tarea creada",
+      "deleteTask": "La tarea ha sido eliminada"
     },
     "defaultCloseBtnTitle": "Cerrar",
     "defaultSuccessMessage": "Operación realizada correctamente",

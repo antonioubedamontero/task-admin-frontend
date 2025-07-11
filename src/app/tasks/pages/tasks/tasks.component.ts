@@ -38,6 +38,12 @@ export default class TasksComponent {
     });
   });
 
+  createdTaskItems = computed(() => this.createdTaskResouce.value() ?? []);
+  startedTaskItems = computed(() => this.startedTaskResouce.value() ?? []);
+  pausedTaskItems = computed(() => this.pausedTaskResouce.value() ?? []);
+  canceledTaskItems = computed(() => this.canceledTaskResouce.value() ?? []);
+  endedTaskItems = computed(() => this.endedTaskResouce.value() ?? []);
+
   createdTaskResouce = rxResource({
     params: () => TaskState.CREATED,
     stream: ({ params: state }) =>
@@ -111,6 +117,7 @@ export default class TasksComponent {
   private mapTasksToMiniTask(tasks: TaskResponseItem[]): MiniTaskItem[] {
     return tasks.map((task: TaskResponseItem) => {
       const mappedTask: MiniTaskItem = {
+        _id: task._id,
         title: task.name,
         description: task.description,
       };

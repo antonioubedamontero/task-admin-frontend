@@ -1,11 +1,11 @@
 <div class="bg-amber-200 flex p-2 gap-2 justify-center flex-wrap">
-  <button class="flex gap-2 green-button">
+  <button class="flex gap-2 green-button" (click)="btnClicked.emit('view')">
     <lucide-icon name="eye"></lucide-icon>
   </button>
-  <button class="flex gap-2 blue-button">
+  <button class="flex gap-2 blue-button" (click)="btnClicked.emit('edit')">
     <lucide-icon name="pencil"></lucide-icon>
   </button>
-  <button class="flex gap-2 red-button">
+  <button class="flex gap-2 red-button" (click)="btnClicked.emit('delete')">
     <lucide-icon name="trash"></lucide-icon>
   </button>
 </div>

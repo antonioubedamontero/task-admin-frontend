@@ -3,7 +3,7 @@
 }
 
 .modal-overlay {
-  @apply z-1000 fixed top-0 left-0 w-screen min-h-screen bg-black opacity-65;
+  @apply z-1000 fixed top-0 left-0 w-screen min-h-screen opacity-60;
 }
 
 .modal-header {

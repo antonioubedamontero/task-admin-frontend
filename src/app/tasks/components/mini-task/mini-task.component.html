@@ -31,5 +31,14 @@
 
   <hr class="h-0.5 mt-2 text-gray-400" />
 
-  <app-mini-task-buttons />
+  <app-mini-task-buttons (btnClicked)="manageClickedBtn($event)" />
 </div>
+
+@if (messageService.isModalShown()) {
+<app-modal-user-feedback
+  [modalType]="messageService.modalType()"
+  [title]="messageService.modalTitle()"
+  [description]="messageService.modalText()"
+  (closeModal)="closeModal()"
+/>
+}
