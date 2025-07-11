@@ -3,7 +3,6 @@ import { inject } from '@angular/core';
 
 import { AuthService } from '../services';
 import { LanguageService } from '../services/language.service';
-import { DEFAULT_LANG } from '../../available-langs';
 
 export const authInterceptor = (
   req: HttpRequest<unknown>,

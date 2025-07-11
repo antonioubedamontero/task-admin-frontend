@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.6.0] - 2025-07-10
+## [0.6.0] - 2025-07-11
 
 - New task form added and messages.
 - Added header service with title and back button features.
@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Some minnor css changes.
 - Fix header to top of screen.
 - Extract success and error messages to a service.
+- Integrate message service to addTask, login and register.
 
 ## [0.5.0] - 2025-07-03
 

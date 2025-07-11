@@ -3,21 +3,20 @@ import {
   Component,
   DestroyRef,
   inject,
-  signal,
 } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { FormService } from '../../../shared/services';
+import { FormService, MessageService } from '../../../shared/services';
 import { UserService } from '../../services';
 import { LoginRequest } from '../../interfaces';
 import { ModalUserFeedbackComponent } from '../../../shared/components/modal-user-feedback/modal-user-feedback.component';
 import { ModelUserFeedbackType } from '../../../shared/interfaces';
-import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   imports: [TranslateModule, ReactiveFormsModule, ModalUserFeedbackComponent],
@@ -25,16 +24,13 @@ import { HttpErrorResponse } from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class LoginComponent {
-  modelUserFeedbackType = ModelUserFeedbackType;
-
   private fb = inject(FormBuilder);
   private userService = inject(UserService);
   private router = inject(Router);
+  private translate = inject(TranslateService);
   private destroyRef = inject(DestroyRef);
   formService = inject(FormService);
-
-  isErrorModal = signal<boolean>(false);
-  errorText = signal<string>('');
+  messageService = inject(MessageService);
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -65,14 +61,16 @@ export default class LoginComponent {
           }
         },
         error: (errorResponse: HttpErrorResponse) => {
-          this.isErrorModal.set(true);
-          this.errorText.set(errorResponse.error.message);
+          const title = this.translate.instant(
+            'modalUserFeedback.defaultErrorTitle'
+          );
+          const message = errorResponse.error.message;
+          this.messageService.showModal(
+            title,
+            message,
+            ModelUserFeedbackType.ERROR
+          );
         },
       });
-  }
-
-  closeModal(): void {
-    this.isErrorModal.set(false);
-    this.errorText.set('');
   }
 }
