@@ -1,17 +1,19 @@
-<article>
-  <h2 class="py-2 text-center font-bold text-blue-600">
+<article class="min-h-screen">
+  <h2 class="py-2 text-center font-bold bg-sky-500 text-white">
     {{ `tasks.taskStates.${state()}` | translate }}
   </h2>
 
-  <hr class="w-full border-1 border-gray-400" />
+  <hr class="w-full border-1 border-gray-500" />
 
   <div class="mt-4 p-2 flex justify-center flex-wrap gap-3">
     @for (task of taskItems(); track task.title) {
     <app-mini-task
+      class="w-11/12"
       [taskItem]="{
         title: task.title,
         startDate: task.startDate,
-        dueDate: task.dueDate
+        dueDate: task.dueDate,
+        description: task.description
       }"
     />
     }

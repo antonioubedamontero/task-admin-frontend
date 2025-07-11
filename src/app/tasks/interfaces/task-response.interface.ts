@@ -1,5 +1,9 @@
 import { TaskState } from './task-state.interface';
 
+export interface TaskResponse {
+  task: TaskResponseItem;
+  token: string;
+}
 export interface TasksResponse {
   tasks: TaskResponseItem[];
   token: string;

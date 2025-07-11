@@ -10,15 +10,16 @@ import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { catchError, map, of } from 'rxjs';
 
-import { headerTitle$ } from '../../components/header/header.component';
 import { AuthService } from '../../../auth/services';
 import { MiniTaskItem, TaskResponseItem, TaskState } from '../../interfaces';
 import { MiniTaskByCategoryComponent } from '../../components/mini-task-by-category/mini-task-by-category.component';
-import { TaskService } from '../../services';
+import { HeaderService, TaskService } from '../../services';
+import { LucideAngularModule } from 'lucide-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
-  imports: [TranslateModule, MiniTaskByCategoryComponent],
+  imports: [TranslateModule, MiniTaskByCategoryComponent, LucideAngularModule],
   templateUrl: './tasks.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -26,7 +27,9 @@ export default class TasksComponent {
   translate = inject(TranslateService);
   authService = inject(AuthService);
   taskService = inject(TaskService);
-  private destroyRef = inject(DestroyRef);
+  headerService = inject(HeaderService);
+  router = inject(Router);
+  destroyRef = inject(DestroyRef);
 
   readonly taskState = TaskState;
   private headerTitle = computed(() => {
@@ -97,13 +100,19 @@ export default class TasksComponent {
   });
 
   constructor() {
-    headerTitle$.next(this.headerTitle());
+    this.headerService.setTitle(this.headerTitle());
+    this.headerService.showBackBtn = false;
+  }
+
+  addTask(): void {
+    this.router.navigateByUrl('/tasks/new');
   }
 
   private mapTasksToMiniTask(tasks: TaskResponseItem[]): MiniTaskItem[] {
     return tasks.map((task: TaskResponseItem) => {
       const mappedTask: MiniTaskItem = {
         title: task.name,
+        description: task.description,
       };
       if (task.startDate) {
         mappedTask.startDate = task.startDate;

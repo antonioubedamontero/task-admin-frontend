@@ -1,7 +1,78 @@
-<p>
-  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel commodi magnam
-  voluptas blanditiis voluptatem omnis molestiae doloribus? Eveniet harum
-  impedit ipsum, voluptates a inventore cupiditate id, explicabo nostrum eos,
-  voluptatum officia illo. Suscipit, culpa et. Dignissimos culpa animi error
-  velit!
-</p>
+<div class="h-screen flex justify-center items-center">
+  <form
+    class="form w-fit"
+    [formGroup]="newTaskForm"
+    (ngSubmit)="submitNewTask()"
+  >
+    <div id="form-new-task-title">
+      <h1 class="form-title">
+        {{ "newTask.title" | translate }}
+      </h1>
+    </div>
+
+    <hr class="my-4 text-gray-400" />
+
+    <section id="form-new-task-data">
+      <div class="form-group">
+        <label class="font-medium" for="name">
+          {{ "newTask.form.name.title" | translate }}
+        </label>
+        <div class="form-input-group">
+          <input
+            class="input-field"
+            type="text"
+            id="name"
+            formControlName="name"
+            [placeholder]="'newTask.form.name.placeholder' | translate"
+          />
+          @if (formService.hasControlErrors(newTaskForm, 'name')) {
+          <span class="form-input-error-msg">
+            {{ formService.getFormControlErrors(newTaskForm, "name") }}
+          </span>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="font-medium" for="description">
+          {{ "newTask.form.description.title" | translate }}
+        </label>
+        <div class="form-input-group">
+          <textarea
+            class="input-field"
+            id="description"
+            formControlName="description"
+            [placeholder]="'newTask.form.description.placeholder' | translate"
+            rows="4"
+          >
+          </textarea>
+
+          @if (formService.hasControlErrors(newTaskForm, 'description')) {
+          <span class="form-input-error-msg">
+            {{ formService.getFormControlErrors(newTaskForm, "description") }}
+          </span>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button
+          [disabled]="newTaskForm.invalid"
+          class="w-full blue-button"
+          type="submit"
+        >
+          {{ "newTask.addTaskBtn" | translate }}
+        </button>
+      </div>
+    </section>
+  </form>
+</div>
+
+@if (messageService.isModalShown()) {
+<app-modal-user-feedback
+  [modalType]="messageService.modalType()"
+  [title]="messageService.modalTitle()"
+  [description]="messageService.modalText()"
+  (closeModal)="closeModal()"
+/>
+}

@@ -3,15 +3,14 @@ import {
   Component,
   DestroyRef,
   inject,
-  signal,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { FormService } from '../../../shared/services';
+import { FormService, MessageService } from '../../../shared/services';
 import { EmailTakenValidator, matchPasswordsValidator } from '../../validators';
 import { UserService } from '../../services';
 import { RegisterRequest } from '../../interfaces';
@@ -30,11 +29,10 @@ export default class RegisterComponent {
   private emailTakenValidator = inject(EmailTakenValidator);
   private userService = inject(UserService);
   private router = inject(Router);
+  private translate = inject(TranslateService);
   private destroyRef = inject(DestroyRef);
   formService = inject(FormService);
-
-  isErrorModal = signal<boolean>(false);
-  errorText = signal<string>('');
+  messageService = inject(MessageService);
 
   registerForm = this.fb.group(
     {
@@ -74,14 +72,16 @@ export default class RegisterComponent {
       .subscribe({
         next: () => this.router.navigateByUrl('/tasks'),
         error: (errorResponse) => {
-          this.isErrorModal.set(true);
-          this.errorText.set(errorResponse.error.message);
+          const title = this.translate.instant(
+            'modalUserFeedback.defaultErrorTitle'
+          );
+          const message = errorResponse.error.message;
+          this.messageService.showModal(
+            title,
+            message,
+            ModelUserFeedbackType.ERROR
+          );
         },
       });
-  }
-
-  closeModal(): void {
-    this.isErrorModal.set(false);
-    this.errorText.set('');
   }
 }

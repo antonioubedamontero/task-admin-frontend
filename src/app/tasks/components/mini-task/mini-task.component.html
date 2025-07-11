@@ -1,22 +1,22 @@
 <div
-  class="w-full shadow-xl/30 border-2 bg-yellow-200 text-gray-700 border-gray-400"
+  class="w-full shadow-xl/30 border-2 bg-yellow-200 text-gray-700 border-gray-500"
 >
-  <h3 class="text-center font-semibold">
+  <h3 class="bg-yellow-300 text-center font-semibold">
     {{ taskItem().title }}
   </h3>
 
-  <hr class="h-0.5 my-2 text-gray-400" />
+  <hr class="h-0.5 mb-2 text-gray-400" />
 
   <div class="p-2 my-2 flex gap-2 flex-col">
     <div class="flex flex-col">
-      <div class="font-medium">
+      <div class="font-semibold">
         {{ "miniTask.startDate" | translate }}
       </div>
       <span>{{ formatDate(taskItem().startDate) }}</span>
     </div>
 
     <div class="flex flex-col">
-      <div class="font-medium">
+      <div class="font-semibold">
         {{ "miniTask.dueDate" | translate }}
       </div>
       <span>{{ formatDate(taskItem().dueDate) }}</span>
@@ -24,6 +24,12 @@
   </div>
 
   <hr class="h-0.5 my-2 text-gray-400" />
+
+  <div class="mt-2 text-center">
+    {{ taskItem().description }}
+  </div>
+
+  <hr class="h-0.5 mt-2 text-gray-400" />
 
   <app-mini-task-buttons />
 </div>

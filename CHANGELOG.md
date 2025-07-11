@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0] - 2025-07-11
+
+- New task form added and messages.
+- Added header service with title and back button features.
+- Added create task in tasks page.
+- Added language in accept-language by interceptor.
+- Some minnor css changes.
+- Fix header to top of screen.
+- Extract success and error messages to a service.
+- Integrate message service to addTask, login and register.
+
 ## [0.5.0] - 2025-07-03
 
 - Add error and success modal messages.

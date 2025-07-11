@@ -1,13 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
+import { Router } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
-import { AuthService } from '../../../auth/services';
-import { BehaviorSubject, Subscription } from 'rxjs';
 import { LucideAngularModule } from 'lucide-angular';
-import { Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
 
-export const headerTitle$ = new BehaviorSubject('');
+import { AuthService } from '../../../auth/services';
+import { HeaderService } from '../../services';
 
 @Component({
   selector: 'app-header',
@@ -16,12 +19,11 @@ export const headerTitle$ = new BehaviorSubject('');
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  headerTitle = toSignal(headerTitle$);
-
   authService = inject(AuthService);
   router = inject(Router);
+  headerService = inject(HeaderService);
 
-  subscriptions: Subscription[] = [];
+  headerTitle = computed(() => this.headerService.title());
 
   logout(): void {
     this.authService.logout();

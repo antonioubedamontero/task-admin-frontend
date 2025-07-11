@@ -3,15 +3,15 @@
     "title": "Login",
     "form": {
       "email": {
-        "title": "* Email",
+        "title": "*Email",
         "placeholder": "example@domain.com"
       },
       "password": {
-        "title": "* Password",
+        "title": "*Password",
         "placeholder": "123456"
       }
     },
-    "loginButton": "Login",
+    "loginButton": "Enter",
     "dialogMessageError": {
       "title": "Error logging in"
     }
@@ -32,53 +32,72 @@
         "placeholder": "Doe"
       },
       "password": {
-        "title": "*Password",
+        "title": "* Password",
         "placeholder": "a43$b1E5AqoP"
       },
       "repeatPassword": {
-        "title": "*Repeat Password",
+        "title": "* Repeat Password",
         "placeholder": "a43$b1E5AqoP"
       }
     },
-    "registerButton": "User registration",
+    "registerButton": "User Registration",
     "dialogMessageError": {
-      "title": "Error registering user"
+      "title": "Registration Error"
     }
   },
   "taskDetails": {
     "title": "Task Details"
   },
   "newTask": {
-    "title": "New Task"
+    "title": "New Task",
+    "addTaskBtn": "Save",
+    "form": {
+      "name": {
+        "title": "* Name",
+        "placeholder": "Sample Task"
+      },
+      "description": {
+        "title": "* Description",
+        "placeholder": "Task description"
+      }
+    },
+    "dialogMessageError": {
+      "title": "Error adding task"
+    }
   },
   "updateTask": {
-    "title": "Update Task"
+    "title": "Update task"
   },
   "tasks": {
-    "title": "{{name}}'s Tasks",
+    "title": "Tasks of {{name}}",
+    "addTaskBtn": "Add task",
     "taskStates": {
       "created": "Created",
       "started": "Started",
-      "paused": "Paused",
+      "paused": "Stopped",
       "canceled": "Canceled",
-      "ended": "Finished"
+      "ended": "Completed"
     },
     "noTasks": "No tasks"
   },
   "miniTask": {
     "startDate": "Start date:",
-    "dueDate": "Due date:"
+    "dueDate": "End date:"
   },
-  "logout": "Logout",
+  "logout": "Exit",
   "modalUserFeedback": {
-    "defaultTitle": "Operation completed successfully",
-    "defaultCloseBtnTitle": "Close"
+    "defaultSuccessTitle": {
+      "newTask": "New task created"
+    },
+    "defaultCloseBtnTitle": "Close",
+    "defaultSuccessMessage": "Operation completed successfully",
+    "defaultErrorTitle": "An error occurred"
   },
   "errors": {
     "email": "The field is not a valid email",
     "required": "The field is required",
     "other": "Undefined error",
-    "emailTaken": "User is not available",
-    "distinctPasswd": "Passwords do not match"
+    "emailTaken": "User not available",
+    "distinctPasswd": "The passwords do not match"
   }
 }
