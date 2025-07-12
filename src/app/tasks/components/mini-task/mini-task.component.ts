@@ -65,7 +65,7 @@ export class MiniTaskComponent {
   }
 
   private manageClickViewBtn(): void {
-    // TODO: Pending implementation
+    this.router.navigate(['/tasks', this.taskItem()._id]);
   }
 
   private manageClickEditBtn(): void {

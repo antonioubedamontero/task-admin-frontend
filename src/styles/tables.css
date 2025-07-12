@@ -1,0 +1,7 @@
+.table-header {
+  @apply bg-cyan-700 text-white;
+}
+
+.border-cell {
+  @apply border-1 border-gray-400 text-center;
+}

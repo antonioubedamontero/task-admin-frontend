@@ -27,6 +27,8 @@ import {
   CircleAlert,
   Plus,
   ArrowLeft,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-angular';
 
 import { authInterceptor } from './auth/interceptors/auth.interceptor';
@@ -41,6 +43,8 @@ const lucideIcons = {
   CircleAlert,
   Plus,
   ArrowLeft,
+  ChevronDown,
+  ChevronUp,
 };
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
