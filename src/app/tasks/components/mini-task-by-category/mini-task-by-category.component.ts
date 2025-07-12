@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -15,4 +20,6 @@ export class MiniTaskByCategoryComponent {
   title = input.required<string>();
   state = input.required<TaskState>();
   taskItems = input.required<MiniTaskItem[]>();
+
+  reloadTasks = output<boolean>();
 }

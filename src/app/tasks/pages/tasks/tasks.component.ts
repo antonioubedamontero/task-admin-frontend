@@ -4,18 +4,21 @@ import {
   computed,
   DestroyRef,
   inject,
+  OnInit,
+  signal,
 } from '@angular/core';
 
-import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+
 import { catchError, map, of } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LucideAngularModule } from 'lucide-angular';
 
 import { AuthService } from '../../../auth/services';
 import { MiniTaskItem, TaskResponseItem, TaskState } from '../../interfaces';
 import { MiniTaskByCategoryComponent } from '../../components/mini-task-by-category/mini-task-by-category.component';
 import { HeaderService, TaskService } from '../../services';
-import { LucideAngularModule } from 'lucide-angular';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -23,7 +26,7 @@ import { Router } from '@angular/router';
   templateUrl: './tasks.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TasksComponent {
+export default class TasksComponent implements OnInit {
   translate = inject(TranslateService);
   authService = inject(AuthService);
   taskService = inject(TaskService);
@@ -38,70 +41,49 @@ export default class TasksComponent {
     });
   });
 
-  createdTaskResouce = rxResource({
-    params: () => TaskState.CREATED,
-    stream: ({ params: state }) =>
-      this.taskService.getTasksByState(state).pipe(
-        map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
-        catchError((error) => {
-          console.error('error retrieving created tasks', error);
-          return of([]);
-        })
-      ),
-  });
+  createdTaskItems = signal<MiniTaskItem[]>([]);
+  startedTaskItems = signal<MiniTaskItem[]>([]);
+  pausedTaskItems = signal<MiniTaskItem[]>([]);
+  canceledTaskItems = signal<MiniTaskItem[]>([]);
+  endedTaskItems = signal<MiniTaskItem[]>([]);
 
-  startedTaskResouce = rxResource({
-    params: () => TaskState.STARTED,
-    stream: ({ params: state }) =>
-      this.taskService.getTasksByState(state).pipe(
-        map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
-        catchError((error) => {
-          console.error('error retrieving started tasks', error);
-          return of([]);
-        })
-      ),
-  });
-
-  pausedTaskResouce = rxResource({
-    params: () => TaskState.PAUSED,
-    stream: ({ params: state }) =>
-      this.taskService.getTasksByState(state).pipe(
-        map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
-        catchError((error) => {
-          console.error('error retrieving paused tasks', error);
-          return of([]);
-        })
-      ),
-  });
-
-  canceledTaskResouce = rxResource({
-    params: () => TaskState.CANCELED,
-    stream: ({ params: state }) =>
-      this.taskService.getTasksByState(state).pipe(
-        map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
-        catchError((error) => {
-          console.error('error retrieving canceled tasks', error);
-          return of([]);
-        })
-      ),
-  });
-
-  endedTaskResouce = rxResource({
-    params: () => TaskState.ENDED,
-    stream: ({ params: state }) =>
-      this.taskService.getTasksByState(state).pipe(
-        takeUntilDestroyed(this.destroyRef),
-        map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
-        catchError((error) => {
-          console.error('error retrieving ended tasks', error);
-          return of([]);
-        })
-      ),
-  });
-
-  constructor() {
+  ngOnInit(): void {
     this.headerService.setTitle(this.headerTitle());
     this.headerService.showBackBtn = false;
+    this.reloadTasks();
+  }
+
+  reloadTasks(): void {
+    this.loadTaskByStateFromApi(TaskState.CREATED).subscribe((tasks) =>
+      this.createdTaskItems.set(tasks)
+    );
+
+    this.loadTaskByStateFromApi(TaskState.STARTED).subscribe((tasks) =>
+      this.startedTaskItems.set(tasks)
+    );
+
+    this.loadTaskByStateFromApi(TaskState.PAUSED).subscribe((tasks) =>
+      this.pausedTaskItems.set(tasks)
+    );
+
+    this.loadTaskByStateFromApi(TaskState.CANCELED).subscribe((tasks) =>
+      this.canceledTaskItems.set(tasks)
+    );
+
+    this.loadTaskByStateFromApi(TaskState.ENDED).subscribe((tasks) =>
+      this.endedTaskItems.set(tasks)
+    );
+  }
+
+  loadTaskByStateFromApi(state: TaskState) {
+    return this.taskService.getTasksByState(state).pipe(
+      map(({ tasks }) => this.mapTasksToMiniTask(tasks)),
+      catchError((error) => {
+        console.error(`error retrieving ${state} tasks`, error);
+        return of([]);
+      }),
+      takeUntilDestroyed(this.destroyRef)
+    );
   }
 
   addTask(): void {
@@ -111,6 +93,7 @@ export default class TasksComponent {
   private mapTasksToMiniTask(tasks: TaskResponseItem[]): MiniTaskItem[] {
     return tasks.map((task: TaskResponseItem) => {
       const mappedTask: MiniTaskItem = {
+        _id: task._id,
         title: task.name,
         description: task.description,
       };

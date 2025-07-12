@@ -10,7 +10,8 @@
     class="border-1 border-gray-400"
     [title]="'tasks.taskStates.CREATED' | translate"
     [state]="taskState.CREATED"
-    [taskItems]="createdTaskResouce.value() ?? []"
+    [taskItems]="createdTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
 
   <!-- -->
@@ -18,27 +19,31 @@
     class="border-1 border-gray-400"
     [title]="'tasks.taskStates.STARTED' | translate"
     [state]="taskState.STARTED"
-    [taskItems]="startedTaskResouce.value() ?? []"
+    [taskItems]="startedTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
   <!-- -->
   <app-mini-task-by-category
     class="border-1 border-gray-400"
     [title]="'tasks.taskStates.PAUSED' | translate"
     [state]="taskState.PAUSED"
-    [taskItems]="pausedTaskResouce.value() ?? []"
+    [taskItems]="pausedTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
   <!-- -->
   <app-mini-task-by-category
     class="hidden xl:block xl:border-1 xl:border-gray-400"
     [title]="'tasks.taskStates.CANCELED' | translate"
     [state]="taskState.CANCELED"
-    [taskItems]="canceledTaskResouce.value() ?? []"
+    [taskItems]="canceledTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
   <!-- -->
   <app-mini-task-by-category
     class="border-1 border-gray-400"
     [title]="'tasks.taskStates.ENDED' | translate"
     [state]="taskState.ENDED"
-    [taskItems]="endedTaskResouce.value() ?? []"
+    [taskItems]="endedTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
 </section>

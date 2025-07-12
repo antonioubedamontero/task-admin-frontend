@@ -10,7 +10,7 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
 
@@ -51,7 +51,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withRouterConfig({ onSameUrlNavigation: 'reload' })),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     importProvidersFrom([
       TranslateModule.forRoot({

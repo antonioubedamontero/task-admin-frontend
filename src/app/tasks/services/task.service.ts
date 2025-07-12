@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import {
+  DeleteResponse,
   NewTaskRequest,
   TaskResponse,
   TasksResponse,
@@ -28,5 +29,9 @@ export class TaskService {
 
   getTasksByState(state: TaskState): Observable<TasksResponse> {
     return this.http.get<TasksResponse>(`${BASE_URL}/tasks/state/${state}`);
+  }
+
+  deleteTask(taskId: string): Observable<DeleteResponse> {
+    return this.http.delete<DeleteResponse>(`${BASE_URL}/tasks/${taskId}`);
   }
 }

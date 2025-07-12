@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 
 import { LucideAngularModule } from 'lucide-angular';
+
+import { MiniTaskType } from '../../../interfaces';
 
 @Component({
   selector: 'app-mini-task-buttons',
@@ -8,4 +10,6 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './mini-task-buttons.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MiniTaskButtonsComponent {}
+export class MiniTaskButtonsComponent {
+  btnClicked = output<MiniTaskType>();
+}
