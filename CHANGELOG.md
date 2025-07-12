@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.7.0] - 2025-07-11
+## [0.7.0] - 2025-07-12
 
 - Added delete task feature.
 - Emit mini task component button clicked.

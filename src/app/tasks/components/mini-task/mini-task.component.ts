@@ -4,6 +4,7 @@ import {
   DestroyRef,
   inject,
   input,
+  output,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -37,6 +38,7 @@ export class MiniTaskComponent {
   destroyRef = inject(DestroyRef);
 
   taskItem = input.required<MiniTaskItem>();
+  reloadTasks = output<boolean>();
 
   formatDate(dateString?: string): string {
     if (!dateString) return 'N/A';
@@ -108,6 +110,7 @@ export class MiniTaskComponent {
     this.messageService.isModalShown.set(false);
     if (this.messageService.modalType() === ModelUserFeedbackType.success) {
       // FIX: This navigation is not working
+      this.reloadTasks.emit(true);
       this.router.navigateByUrl('/tasks');
     }
   }

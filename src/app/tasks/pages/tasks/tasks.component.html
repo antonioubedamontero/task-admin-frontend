@@ -11,6 +11,7 @@
     [title]="'tasks.taskStates.CREATED' | translate"
     [state]="taskState.CREATED"
     [taskItems]="createdTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
 
   <!-- -->
@@ -19,6 +20,7 @@
     [title]="'tasks.taskStates.STARTED' | translate"
     [state]="taskState.STARTED"
     [taskItems]="startedTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
   <!-- -->
   <app-mini-task-by-category
@@ -26,6 +28,7 @@
     [title]="'tasks.taskStates.PAUSED' | translate"
     [state]="taskState.PAUSED"
     [taskItems]="pausedTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
   <!-- -->
   <app-mini-task-by-category
@@ -33,6 +36,7 @@
     [title]="'tasks.taskStates.CANCELED' | translate"
     [state]="taskState.CANCELED"
     [taskItems]="canceledTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
   <!-- -->
   <app-mini-task-by-category
@@ -40,5 +44,6 @@
     [title]="'tasks.taskStates.ENDED' | translate"
     [state]="taskState.ENDED"
     [taskItems]="endedTaskItems()"
+    (reloadTasks)="reloadTasks()"
   />
 </section>

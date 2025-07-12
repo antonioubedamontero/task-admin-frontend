@@ -6,16 +6,11 @@
   <hr class="w-full border-1 border-gray-500" />
 
   <div class="mt-4 p-2 flex justify-center flex-wrap gap-3">
-    @for (task of taskItems(); track task.title) {
+    @for (taskItem of taskItems(); track taskItem.title) {
     <app-mini-task
       class="w-11/12"
-      [taskItem]="{
-        _id: task._id,
-        title: task.title,
-        startDate: task.startDate,
-        dueDate: task.dueDate,
-        description: task.description
-      }"
+      [taskItem]="taskItem"
+      (reloadTasks)="this.reloadTasks.emit(true)"
     />
     }
   </div>
