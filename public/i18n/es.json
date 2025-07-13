@@ -55,7 +55,7 @@
     }
   },
   "taskDetails": {
-    "title": "Detalle de la tarea",
+    "title": "Detalle de la tarea: {{taskName}}",
     "form": {
       "name": "Nombre",
       "description": "Descripción",
@@ -83,7 +83,7 @@
     }
   },
   "updateTask": {
-    "title": "Actualizar tarea",
+    "title": "Actualizar tarea: {{taskName}}",
     "form": {
       "name": {
         "title": "Nombre",
@@ -108,10 +108,11 @@
       }
     },
     "saveBtn": "Guardar",
-    "cleanFormBtn": "Resetear"
+    "cleanFormBtn": "Resetear",
+    "closeBtn": "Cerrar"
   },
   "tasks": {
-    "title": "Tareas de {{name}}",
+    "title": "Tareas de: {{name}}",
     "addTaskBtn": "Agregar tarea",
     "taskStates": {
       "created": "Creada",

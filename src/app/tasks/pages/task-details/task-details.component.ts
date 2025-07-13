@@ -17,10 +17,16 @@ import { FormatDateService, HeaderService, TaskService } from '../../services';
 import { MessageService } from '../../../shared/services';
 import { TaskResponseItem } from '../../interfaces';
 import { TaskLogSectionComponent } from '../../components/task-log-section/task-log-section.component';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-task-details',
-  imports: [TranslateModule, ReactiveFormsModule, TaskLogSectionComponent],
+  imports: [
+    TranslateModule,
+    ReactiveFormsModule,
+    LucideAngularModule,
+    TaskLogSectionComponent,
+  ],
   templateUrl: './task-details.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -46,6 +52,7 @@ export default class TaskDetailsComponent {
   setFormDataEffect = effect(() => {
     const taskDetailsData = this.taskDetailValue();
     if (taskDetailsData) {
+      this.setTitle(taskDetailsData.name);
       this.setFormValue(taskDetailsData);
     }
   });
@@ -62,9 +69,19 @@ export default class TaskDetailsComponent {
   });
 
   constructor() {
-    const headerTitle = this.translate.instant('taskDetails.title');
-    this.headerService.setTitle(headerTitle);
+    this.setHeaderTitle();
+  }
+
+  private setHeaderTitle(): void {
     this.headerService.showBackBtn = true;
+    this.setTitle('');
+  }
+
+  private setTitle(taskName: string): void {
+    const headerTitle = this.translate.instant('taskDetails.title', {
+      taskName,
+    });
+    this.headerService.setTitle(headerTitle);
   }
 
   setFormValue(taskDetailData: TaskResponseItem): void {

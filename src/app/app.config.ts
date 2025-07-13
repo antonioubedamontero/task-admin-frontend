@@ -29,6 +29,14 @@ import {
   ArrowLeft,
   ChevronDown,
   ChevronUp,
+  ClipboardPen,
+  Pause,
+  Flag,
+  Flower2,
+  Album,
+  Save,
+  ListRestart,
+  X,
 } from 'lucide-angular';
 
 import { authInterceptor } from './auth/interceptors/auth.interceptor';
@@ -45,6 +53,14 @@ const lucideIcons = {
   ArrowLeft,
   ChevronDown,
   ChevronUp,
+  ClipboardPen,
+  Pause,
+  Flag,
+  Flower2,
+  Album,
+  Save,
+  ListRestart,
+  X,
 };
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (

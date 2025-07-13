@@ -4,14 +4,6 @@
     [formGroup]="newTaskForm"
     (ngSubmit)="submitNewTask()"
   >
-    <div id="form-new-task-title">
-      <h1 class="form-title">
-        {{ "newTask.title" | translate }}
-      </h1>
-    </div>
-
-    <hr class="my-4 text-gray-400" />
-
     <section id="form-new-task-data">
       <div class="form-group">
         <label class="font-medium" for="name">
@@ -58,9 +50,10 @@
       <div class="form-group">
         <button
           [disabled]="newTaskForm.invalid"
-          class="w-full blue-button"
+          class="w-full flex justify-center gap-2 blue-button"
           type="submit"
         >
+          <lucide-icon name="save"></lucide-icon>
           {{ "newTask.addTaskBtn" | translate }}
         </button>
       </div>

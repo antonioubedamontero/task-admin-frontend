@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LucideAngularModule } from 'lucide-angular';
 
 import { HeaderService, TaskService } from '../../services';
 import { ModalUserFeedbackComponent } from '../../../shared/components/modal-user-feedback/modal-user-feedback.component';
@@ -19,7 +20,12 @@ import { FormService, MessageService } from '../../../shared/services';
 
 @Component({
   selector: 'app-new-task',
-  imports: [TranslateModule, ReactiveFormsModule, ModalUserFeedbackComponent],
+  imports: [
+    TranslateModule,
+    ReactiveFormsModule,
+    LucideAngularModule,
+    ModalUserFeedbackComponent,
+  ],
   templateUrl: './new-task.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -73,6 +73,8 @@ export class MiniTaskComponent {
   private manageClickDeleteBtn(): void {
     const taskId = this.taskItem()._id;
 
+    // TODO: should show a confirmation dialog
+
     this.taskService
       .deleteTask(taskId)
       .pipe(takeUntilDestroyed(this.destroyRef))

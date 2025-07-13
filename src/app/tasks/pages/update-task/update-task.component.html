@@ -129,12 +129,30 @@
     <app-task-log-section [logStates]="taskDetailValue()?.logStates ?? []" />
 
     <div class="mt-4 flex justify-center gap-2">
-      <button class="w-full blue-button" type="submit">
+      <button
+        class="w-full flex justify-center gap-2 blue-button"
+        type="submit"
+      >
+        <lucide-icon name="save"></lucide-icon>
         {{ "updateTask.saveBtn" | translate }}
       </button>
 
-      <button class="w-full blue-button" type="button" (click)="resetForm()">
+      <button
+        class="w-full flex justify-center gap-2 blue-button"
+        type="button"
+        (click)="resetForm()"
+      >
+        <lucide-icon name="list-restart"></lucide-icon>
         {{ "updateTask.cleanFormBtn" | translate }}
+      </button>
+
+      <button
+        class="w-full flex justify-center gap-2 blue-button"
+        type="button"
+        (click)="closeForm()"
+      >
+        <lucide-icon name="x"></lucide-icon>
+        {{ "updateTask.closeBtn" | translate }}
       </button>
     </div>
   </form>

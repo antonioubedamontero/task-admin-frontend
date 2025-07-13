@@ -55,7 +55,7 @@
     }
   },
   "taskDetails": {
-    "title": "Task Details",
+    "title": "Task Details: {{taskName}}",
     "form": {
       "name": "Name",
       "description": "Description",
@@ -83,7 +83,7 @@
     }
   },
   "updateTask": {
-    "title": "Update Task",
+    "title": "Update Task: {{taskName}}",
     "form": {
       "name": {
         "title": "Name",
@@ -108,11 +108,12 @@
       }
     },
     "saveBtn": "Save",
-    "cleanFormBtn": "Reset"
+    "cleanFormBtn": "Reset",
+    "closeBtn": "Close"
   },
   "tasks": {
-    "title": "Tasks of {{name}}",
-    "addTaskBtn": "Add task",
+    "title": "Tasks from: {{name}}",
+    "addTaskBtn": "Add Task",
     "taskStates": {
       "created": "Created",
       "started": "Started",
@@ -120,16 +121,16 @@
       "canceled": "Canceled",
       "ended": "Completed"
     },
-    "noTasks": "No tasks"
+    "noTasks": "No Tasks"
   },
   "miniTask": {
-    "startDate": "Start date:",
-    "dueDate": "End date:"
+    "startDate": "Start Date:",
+    "dueDate": "End Date:"
   },
-  "logout": "Exit",
+  "logout": "Logout",
   "modalUserFeedback": {
     "defaultSuccessTitle": {
-      "newTask": "New task created",
+      "newTask": "New Task Created",
       "deleteTask": "Task has been deleted"
     },
     "defaultCloseBtnTitle": "Close",
@@ -139,7 +140,7 @@
   "errors": {
     "email": "The field is not a valid email",
     "required": "The field is required",
-    "other": "An error was not defined",
+    "other": "Undefined error",
     "emailTaken": "User not available",
     "distinctPasswd": "Passwords do not match"
   },

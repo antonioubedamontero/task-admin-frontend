@@ -111,7 +111,11 @@
     <app-task-log-section [logStates]="taskDetailValue()?.logStates ?? []" />
 
     <div class="mt-4 flex justify-center">
-      <button class="w-full blue-button" type="submit">
+      <button
+        class="w-full flex justify-center gap-2 blue-button"
+        type="submit"
+      >
+        <lucide-icon name="x"></lucide-icon>
         {{ "taskDetails.closeTaskDetailsBtn" | translate }}
       </button>
     </div>
