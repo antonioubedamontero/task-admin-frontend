@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.9.0] - 2025-07-13
+
+- Added update task page.
+- Change styles for non midifiable form fields.
+
 ## [0.8.0] - 2025-07-13
 
 - Added task details page.

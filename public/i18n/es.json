@@ -83,7 +83,32 @@
     }
   },
   "updateTask": {
-    "title": "Actualizar tarea"
+    "title": "Actualizar tarea",
+    "form": {
+      "name": {
+        "title": "Nombre",
+        "placeholder": "nombre de la tarea"
+      },
+      "description": {
+        "title": "Descripción",
+        "placeholder": "descripción de la tarea"
+      },
+      "currentState": {
+        "title": "Estado"
+      },
+      "justification": {
+        "title": "Justificación",
+        "placeholder": "motivo del cambio"
+      },
+      "startDate": {
+        "title": "Fecha desde"
+      },
+      "dueDate": {
+        "title": "Fecha hasta"
+      }
+    },
+    "saveBtn": "Guardar",
+    "cleanFormBtn": "Resetear"
   },
   "tasks": {
     "title": "Tareas de {{name}}",

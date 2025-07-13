@@ -55,7 +55,7 @@
     }
   },
   "taskDetails": {
-    "title": "Task details",
+    "title": "Task Details",
     "form": {
       "name": "Name",
       "description": "Description",
@@ -83,11 +83,36 @@
     }
   },
   "updateTask": {
-    "title": "Update Task"
+    "title": "Update Task",
+    "form": {
+      "name": {
+        "title": "Name",
+        "placeholder": "Task name"
+      },
+      "description": {
+        "title": "Description",
+        "placeholder": "Task description"
+      },
+      "currentState": {
+        "title": "Status"
+      },
+      "justification": {
+        "title": "Justification",
+        "placeholder": "Reason for change"
+      },
+      "startDate": {
+        "title": "From date"
+      },
+      "dueDate": {
+        "title": "To date"
+      }
+    },
+    "saveBtn": "Save",
+    "cleanFormBtn": "Reset"
   },
   "tasks": {
-    "title": "Tasks {{name}}",
-    "addTaskBtn": "Add Task",
+    "title": "Tasks of {{name}}",
+    "addTaskBtn": "Add task",
     "taskStates": {
       "created": "Created",
       "started": "Started",
@@ -95,34 +120,34 @@
       "canceled": "Canceled",
       "ended": "Completed"
     },
-    "noTasks": "No Tasks"
+    "noTasks": "No tasks"
   },
   "miniTask": {
-    "startDate": "Start Date:",
-    "dueDate": "End Date:"
+    "startDate": "Start date:",
+    "dueDate": "End date:"
   },
-  "logout": "Logout",
+  "logout": "Exit",
   "modalUserFeedback": {
     "defaultSuccessTitle": {
-      "newTask": "New Task Created",
+      "newTask": "New task created",
       "deleteTask": "Task has been deleted"
     },
     "defaultCloseBtnTitle": "Close",
     "defaultSuccessMessage": "Operation completed successfully",
-    "defaultErrorTitle": "An error has occurred. an error"
+    "defaultErrorTitle": "An error occurred"
   },
   "errors": {
     "email": "The field is not a valid email",
     "required": "The field is required",
-    "other": "Undefined error",
+    "other": "An error was not defined",
     "emailTaken": "User not available",
-    "distinctPasswd": "The passwords do not match"
+    "distinctPasswd": "Passwords do not match"
   },
   "taskStates": {
     "created": "Created",
-    "started": "Initiated",
-    "ended": "Finished",
+    "started": "Started",
+    "ended": "Completed",
     "paused": "Paused",
-    "cancelled": "Cancelled"
+    "canceled": "Canceled"
   }
 }
