@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   inject,
   input,
@@ -10,14 +11,13 @@ import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import moment from 'moment';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { MiniTaskButtonsComponent } from './mini-task-buttons/mini-task-buttons.component';
 import { MiniTaskItem, MiniTaskType } from '../../interfaces';
 import { MessageService } from '../../../shared/services';
 import { ModalUserFeedbackComponent } from '../../../shared/components/modal-user-feedback/modal-user-feedback.component';
-import { TaskService } from '../../services';
+import { FormatDateService, TaskService } from '../../services';
 import { ModelUserFeedbackType } from '../../../shared/interfaces';
 @Component({
   selector: 'app-mini-task',
@@ -33,17 +33,15 @@ export class MiniTaskComponent {
   private router = inject(Router);
   private taskService = inject(TaskService);
   private translate = inject(TranslateService);
+  formatDateService = inject(FormatDateService);
   messageService = inject(MessageService);
-
   destroyRef = inject(DestroyRef);
 
   taskItem = input.required<MiniTaskItem>();
   reloadTasks = output<boolean>();
 
-  formatDate(dateString?: string): string {
-    if (!dateString) return 'N/A';
-    return moment(dateString).format('DD-MM-YYYY HH:mm');
-  }
+  startDate = computed(() => this.taskItem().startDate);
+  dueDate = computed(() => this.taskItem().dueDate);
 
   manageClickedBtn(btnAction: MiniTaskType): void {
     switch (btnAction) {
@@ -109,7 +107,6 @@ export class MiniTaskComponent {
   closeModal(): void {
     this.messageService.isModalShown.set(false);
     if (this.messageService.modalType() === ModelUserFeedbackType.success) {
-      // FIX: This navigation is not working
       this.reloadTasks.emit(true);
       this.router.navigateByUrl('/tasks');
     }

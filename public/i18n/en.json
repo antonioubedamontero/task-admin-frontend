@@ -45,23 +45,23 @@
       "title": "Registration Error"
     }
   },
+  "taskLogSection": {
+    "title": "Date Log",
+    "table": {
+      "startDate": "Start",
+      "state": "Status",
+      "endDate": "End",
+      "justification": "Justification"
+    }
+  },
   "taskDetails": {
-    "title": "Task Details",
+    "title": "Task details",
     "form": {
       "name": "Name",
       "description": "Description",
       "currentState": "Status",
       "startDate": "From Date",
       "dueDate": "To Date"
-    },
-    "logs": {
-      "title": "Date Log",
-      "table": {
-        "startDate": "Start",
-        "state": "State",
-        "endDate": "End",
-        "justification": "Justification"
-      }
     },
     "closeTaskDetailsBtn": "Close"
   },
@@ -117,5 +117,12 @@
     "other": "Undefined error",
     "emailTaken": "User not available",
     "distinctPasswd": "The passwords do not match"
+  },
+  "taskStates": {
+    "created": "Created",
+    "started": "Initiated",
+    "ended": "Finished",
+    "paused": "Paused",
+    "cancelled": "Cancelled"
   }
 }

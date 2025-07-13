@@ -5,7 +5,6 @@ import {
   DestroyRef,
   inject,
   effect,
-  signal,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -13,16 +12,15 @@ import { rxResource } from '@angular/core/rxjs-interop';
 
 import { map } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import moment from 'moment';
 
-import { HeaderService, TaskService } from '../../services';
+import { FormatDateService, HeaderService, TaskService } from '../../services';
 import { MessageService } from '../../../shared/services';
 import { TaskResponseItem } from '../../interfaces';
-import { LucideAngularModule } from 'lucide-angular';
+import { TaskLogSectionComponent } from '../../components/task-log-section/task-log-section.component';
 
 @Component({
   selector: 'app-task-details',
-  imports: [TranslateModule, ReactiveFormsModule, LucideAngularModule],
+  imports: [TranslateModule, ReactiveFormsModule, TaskLogSectionComponent],
   templateUrl: './task-details.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -36,8 +34,7 @@ export default class TaskDetailsComponent {
   destroyRef = inject(DestroyRef);
   route = inject(ActivatedRoute);
 
-  isLogDetailsOpen = signal<boolean>(false);
-  chevronIsOpenButton = signal<string>('chevron-down');
+  formatDateService = inject(FormatDateService);
 
   taskDetailsResource = rxResource({
     params: () => ({ id: this.route.snapshot.paramMap.get('id') ?? '' }),
@@ -57,6 +54,7 @@ export default class TaskDetailsComponent {
     name: [''],
     description: [''],
     currentState: [''],
+    currentStateTranslated: [''],
     startDate: [''],
     startTime: [''],
     dueDate: [''],
@@ -77,37 +75,18 @@ export default class TaskDetailsComponent {
       name,
       description,
       currentState,
-      startDate: startDate ? this.getDateFromDate(startDate) : 'N/A',
-      startTime: startDate ? this.getTimeFromDate(startDate) : 'N/A',
-      dueDate: dueDate ? this.getDateFromDate(dueDate) : 'N/A',
-      dueTime: dueDate ? this.getTimeFromDate(dueDate) : 'N/A',
+      currentStateTranslated: this.translate.instant(
+        `taskStates.${currentState}`
+      ),
+      startDate: startDate
+        ? this.formatDateService.getDateFromDate(startDate)
+        : '',
+      startTime: startDate
+        ? this.formatDateService.getTimeFromDate(startDate)
+        : '',
+      dueDate: dueDate ? this.formatDateService.getDateFromDate(dueDate) : '',
+      dueTime: dueDate ? this.formatDateService.getTimeFromDate(dueDate) : '',
     });
-  }
-
-  getDateFromDate(date?: string): string {
-    if (!date) return 'N/A';
-    return moment(date).format('DD-MM-YYYY');
-  }
-
-  getTimeFromDate(date?: string): string {
-    if (!date) return 'N/A';
-    return moment(date).format('HH:mm');
-  }
-
-  getFormattedDate(date?: string): string {
-    if (!date) return 'N/A';
-    return moment(date).format('DD-MM-YYYY HH:mm');
-  }
-
-  toggleIsLogOpen(): void {
-    this.isLogDetailsOpen.update((isOpen) => !isOpen);
-
-    if (this.isLogDetailsOpen()) {
-      this.chevronIsOpenButton.set('chevron-up');
-      return;
-    }
-
-    this.chevronIsOpenButton.set('chevron-down');
   }
 
   closeModal(): void {

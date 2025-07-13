@@ -2,10 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.8.0] - 2025-07-12
+## [0.8.0] - 2025-07-13
 
 - Added task details page.
 - Renew token when call task endpoints.
+- Extract dates management to a service.
+- Addes task state pipe for field translation.
 
 ## [0.7.0] - 2025-07-12
 

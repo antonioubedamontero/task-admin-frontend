@@ -45,23 +45,23 @@
       "title": "Error al realizar el registro"
     }
   },
+  "taskLogSection": {
+    "title": "Log de fechas",
+    "table": {
+      "startDate": "Inicio",
+      "state": "Estado",
+      "endDate": "Fin",
+      "justification": "Justificación"
+    }
+  },
   "taskDetails": {
-    "title": "Detalles de la tarea",
+    "title": "Detalle de la tarea",
     "form": {
       "name": "Nombre",
       "description": "Descripción",
       "currentState": "Estado",
       "startDate": "Fecha desde",
       "dueDate": "Fecha hasta"
-    },
-    "logs": {
-      "title": "Log de fechas",
-      "table": {
-        "startDate": "Inicio",
-        "state": "Estado",
-        "endDate": "Fin",
-        "justification": "Justificación"
-      }
     },
     "closeTaskDetailsBtn": "Cerrar"
   },
@@ -117,5 +117,12 @@
     "other": "Error no definido",
     "emailTaken": "Usuario no disponible",
     "distinctPasswd": "Las contraseñas no coinciden"
+  },
+  "taskStates": {
+    "created": "Creada",
+    "started": "Iniciada",
+    "ended": "Finalizada",
+    "paused": "Pausada",
+    "canceled": "Cancelada"
   }
 }

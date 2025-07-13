@@ -1,17 +1,9 @@
-<div class="min-h-screen mt-16 w-full flex justify-center items-center">
+<div class="min-h-screen w-full flex justify-center items-center">
   <form
     class="form w-screen sm:w-8/12"
     [formGroup]="taskDetailsForm"
     (ngSubmit)="closeModal()"
   >
-    <div id="form-task-details-title">
-      <h2 class="form-title">
-        {{ "taskDetails.title" | translate }}
-      </h2>
-    </div>
-
-    <hr class="my-4 text-gray-400" />
-
     <section id="form-new-task-data">
       <div class="form-group">
         <label class="form-label" for="name">
@@ -34,10 +26,18 @@
         </label>
         <div class="form-input-group">
           <input
-            class="input-field"
+            class="hidden"
             type="text"
             id="currentState"
             formControlName="currentState"
+            readonly
+          />
+          <!-- Translated state -->
+          <input
+            class="input-field"
+            type="text"
+            id="currentStateTranslated"
+            formControlName="currentStateTranslated"
             readonly
           />
         </div>
@@ -108,65 +108,7 @@
       </div>
     </section>
 
-    <section id="form-new-task-data">
-      <header
-        class="bg-blue-700 opacity-75 text-white p-2 rounded-tl-sm rounded-tr-sm"
-      >
-        <button
-          class="w-full flex items-center justify-between"
-          type="button"
-          (click)="toggleIsLogOpen()"
-        >
-          <span class="text-center w-full">
-            {{ "taskDetails.logs.title" | translate }}
-          </span>
-          <lucide-icon
-            class="ml-auto"
-            [name]="chevronIsOpenButton()"
-          ></lucide-icon>
-        </button>
-      </header>
-      @if(isLogDetailsOpen()) {
-      <div class="overflow-x-auto w-full border-1 border-gray-400 p-2">
-        <table class="table-fixed min-w-[600px] w-full">
-          <thead class="border-cell table-header">
-            <tr>
-              <th class="border-cell">
-                {{ "taskDetails.logs.table.startDate" | translate }}
-              </th>
-              <th class="border-cell">
-                {{ "taskDetails.logs.table.state" | translate }}
-              </th>
-              <th class="border-cell">
-                {{ "taskDetails.logs.table.endDate" | translate }}
-              </th>
-              <th class="border-cell">
-                {{ "taskDetails.logs.table.justification" | translate }}
-              </th>
-            </tr>
-          </thead>
-
-          @if(taskDetailValue()) { @for (logStateItem of
-          taskDetailValue()!.logStates; track $index) {
-          <tbody class="border-cell">
-            <tr>
-              <td class="border-cell">
-                {{ getFormattedDate(logStateItem.startDate) }}
-              </td>
-              <td class="border-cell">{{ logStateItem.state }}</td>
-              <td class="border-cell">
-                {{ getFormattedDate(logStateItem.endDate) }}
-              </td>
-              <td class="border-cell">{{ logStateItem.justification }}</td>
-            </tr>
-          </tbody>
-          }
-          <!---->
-          }
-        </table>
-      </div>
-      }
-    </section>
+    <app-task-log-section [logStates]="taskDetailValue()?.logStates ?? []" />
 
     <div class="mt-4 flex justify-center">
       <button class="w-full blue-button" type="submit">
