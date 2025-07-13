@@ -1,0 +1,53 @@
+<section id="form-new-task-data">
+  <header
+    class="bg-blue-700 opacity-75 text-white p-2 rounded-tl-sm rounded-tr-sm"
+  >
+    <button
+      class="w-full flex items-center justify-between"
+      type="button"
+      (click)="toggleIsLogOpen()"
+    >
+      <span class="text-center w-full">
+        {{ "taskLogSection.title" | translate }}
+      </span>
+      <lucide-icon class="ml-auto" [name]="chevronIsOpenButton()"></lucide-icon>
+    </button>
+  </header>
+  @if(isLogDetailsOpen()) {
+  <div class="overflow-x-auto w-full border-1 border-gray-400 p-2">
+    <table class="table-fixed min-w-[600px] w-full">
+      <thead class="border-cell table-header">
+        <tr>
+          <th class="border-cell">
+            {{ "taskLogSection.table.startDate" | translate }}
+          </th>
+          <th class="border-cell">
+            {{ "taskLogSection.table.state" | translate }}
+          </th>
+          <th class="border-cell">
+            {{ "taskLogSection.table.endDate" | translate }}
+          </th>
+          <th class="border-cell">
+            {{ "taskLogSection.table.justification" | translate }}
+          </th>
+        </tr>
+      </thead>
+
+      @for (logStateItem of logStates(); track $index) {
+      <tbody class="border-cell">
+        <tr>
+          <td class="border-cell">
+            {{ formatDateService.getFormattedDate(logStateItem.startDate) }}
+          </td>
+          <td class="border-cell">{{ logStateItem.state | taskState }}</td>
+          <td class="border-cell">
+            {{ formatDateService.getFormattedDate(logStateItem.endDate) }}
+          </td>
+          <td class="border-cell">{{ logStateItem.justification }}</td>
+        </tr>
+      </tbody>
+      }
+    </table>
+  </div>
+  }
+</section>

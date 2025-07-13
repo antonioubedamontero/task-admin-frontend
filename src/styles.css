@@ -3,6 +3,7 @@
 @import "./styles/form.css";
 @import "./styles/buttons.css";
 @import "./styles/modal.css";
+@import "./styles/tables.css";
 
 body {
   font-family: "Montserrat", sans-serif;

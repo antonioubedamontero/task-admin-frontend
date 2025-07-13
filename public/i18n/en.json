@@ -45,8 +45,25 @@
       "title": "Registration Error"
     }
   },
+  "taskLogSection": {
+    "title": "Date Log",
+    "table": {
+      "startDate": "Start",
+      "state": "Status",
+      "endDate": "End",
+      "justification": "Justification"
+    }
+  },
   "taskDetails": {
-    "title": "Task Details"
+    "title": "Task details",
+    "form": {
+      "name": "Name",
+      "description": "Description",
+      "currentState": "Status",
+      "startDate": "From Date",
+      "dueDate": "To Date"
+    },
+    "closeTaskDetailsBtn": "Close"
   },
   "newTask": {
     "title": "New Task",
@@ -58,7 +75,7 @@
       },
       "description": {
         "title": "* Description",
-        "placeholder": "Task description"
+        "placeholder": "Task Description"
       }
     },
     "dialogMessageError": {
@@ -66,11 +83,11 @@
     }
   },
   "updateTask": {
-    "title": "Update task"
+    "title": "Update Task"
   },
   "tasks": {
-    "title": "Tasks of {{name}}",
-    "addTaskBtn": "Add task",
+    "title": "Tasks {{name}}",
+    "addTaskBtn": "Add Task",
     "taskStates": {
       "created": "Created",
       "started": "Started",
@@ -78,21 +95,21 @@
       "canceled": "Canceled",
       "ended": "Completed"
     },
-    "noTasks": "No tasks"
+    "noTasks": "No Tasks"
   },
   "miniTask": {
-    "startDate": "Start date:",
-    "dueDate": "End date:"
+    "startDate": "Start Date:",
+    "dueDate": "End Date:"
   },
-  "logout": "Exit",
+  "logout": "Logout",
   "modalUserFeedback": {
     "defaultSuccessTitle": {
-      "newTask": "New task created",
-      "deleteTask": "Task has been deleted successfully"
+      "newTask": "New Task Created",
+      "deleteTask": "Task has been deleted"
     },
     "defaultCloseBtnTitle": "Close",
     "defaultSuccessMessage": "Operation completed successfully",
-    "defaultErrorTitle": "An error occurred"
+    "defaultErrorTitle": "An error has occurred. an error"
   },
   "errors": {
     "email": "The field is not a valid email",
@@ -100,5 +117,12 @@
     "other": "Undefined error",
     "emailTaken": "User not available",
     "distinctPasswd": "The passwords do not match"
+  },
+  "taskStates": {
+    "created": "Created",
+    "started": "Initiated",
+    "ended": "Finished",
+    "paused": "Paused",
+    "cancelled": "Cancelled"
   }
 }
