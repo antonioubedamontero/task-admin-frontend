@@ -83,7 +83,7 @@
     }
   },
   "updateTask": {
-    "title": "Update Task: {{taskName}}",
+    "title": "Update task: {{taskName}}",
     "form": {
       "name": {
         "title": "Name",
@@ -127,15 +127,16 @@
     "startDate": "Start Date:",
     "dueDate": "End Date:"
   },
-  "logout": "Logout",
+  "logout": "Exit",
   "modalUserFeedback": {
     "defaultSuccessTitle": {
       "newTask": "New Task Created",
-      "deleteTask": "Task has been deleted"
+      "deleteTask": "Task has been deleted",
+      "updateTask": "Task has been updated"
     },
     "defaultCloseBtnTitle": "Close",
     "defaultSuccessMessage": "Operation completed successfully",
-    "defaultErrorTitle": "An error occurred"
+    "defaultErrorTitle": "An error occurred. error"
   },
   "errors": {
     "email": "The field is not a valid email",

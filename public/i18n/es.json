@@ -131,7 +131,8 @@
   "modalUserFeedback": {
     "defaultSuccessTitle": {
       "newTask": "Nueva tarea creada",
-      "deleteTask": "La tarea ha sido eliminada"
+      "deleteTask": "La tarea ha sido eliminada",
+      "updateTask": "La tarea se ha actualizado"
     },
     "defaultCloseBtnTitle": "Cerrar",
     "defaultSuccessMessage": "Operación realizada correctamente",

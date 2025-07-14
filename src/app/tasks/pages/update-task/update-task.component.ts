@@ -8,16 +8,24 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { map } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LucideAngularModule } from 'lucide-angular';
 
 import { FormatDateService, HeaderService, TaskService } from '../../services';
 import { MessageService } from '../../../shared/services';
-import { TaskResponseItem } from '../../interfaces';
+import {
+  availableTaskStates,
+  TaskResponseItem,
+  UpdateTaskRequest,
+} from '../../interfaces';
 import { TaskLogSectionComponent } from '../../components/task-log-section/task-log-section.component';
-import { LucideAngularModule } from 'lucide-angular';
+import { ModelUserFeedbackType } from '../../../shared/interfaces';
+import { ModalUserFeedbackComponent } from '../../../shared/components/modal-user-feedback/modal-user-feedback.component';
+import { TaskStatePipe } from '../../pipes/task-state.pipe';
 
 @Component({
   selector: 'app-update-tasks',
@@ -26,6 +34,8 @@ import { LucideAngularModule } from 'lucide-angular';
     ReactiveFormsModule,
     LucideAngularModule,
     TaskLogSectionComponent,
+    ModalUserFeedbackComponent,
+    TaskStatePipe,
   ],
   templateUrl: './update-task.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,10 +68,10 @@ export default class UpdateTasksComponent {
   });
 
   taskDetailsForm = this.fb.group({
+    _id: [''],
     name: ['', [Validators.required]],
     description: ['', [Validators.required]],
     currentState: ['', [Validators.required]],
-    currentStateTranslated: [''],
     justification: ['', [Validators.required]],
     startDate: [''],
     startTime: [''],
@@ -86,16 +96,14 @@ export default class UpdateTasksComponent {
   }
 
   setFormValue(taskDetailData: TaskResponseItem): void {
-    const { name, description, currentState, startDate, dueDate } =
+    const { _id, name, description, currentState, startDate, dueDate } =
       taskDetailData;
 
     this.taskDetailsForm.patchValue({
+      _id,
       name,
       description,
       currentState,
-      currentStateTranslated: this.translate.instant(
-        `taskStates.${currentState}`
-      ),
       startDate: startDate
         ? this.formatDateService.getDateFromDate(startDate)
         : '',
@@ -109,6 +117,7 @@ export default class UpdateTasksComponent {
 
   resetForm(): void {
     const {
+      _id,
       name,
       description,
       currentState,
@@ -117,13 +126,11 @@ export default class UpdateTasksComponent {
     } = this.taskDetailValue()!;
 
     const initialFormValue = {
+      _id,
       name,
       description,
       currentState,
       justification: '',
-      currentStateTranslated: this.translate.instant(
-        `taskStates.${currentState}`
-      ),
     };
 
     this.taskDetailsForm.setValue({
@@ -139,18 +146,96 @@ export default class UpdateTasksComponent {
     });
   }
 
-  closeForm(): void {
-    this.messageService.isModalShown.set(false);
-    this.router.navigateByUrl('/tasks');
-  }
-
-  updateTask(): void {
+  sendForm(): void {
     if (this.taskDetailsForm.invalid) {
       this.taskDetailsForm.markAllAsTouched();
     }
 
+    const updateTaskReq = this.mapDataToUpdateTaskRequest(
+      this.taskDetailsForm.value
+    );
+
+    this.updateTask(updateTaskReq);
+  }
+
+  private updateTask(updateTaskReq: UpdateTaskRequest): void {
+    this.taskService
+      .updateTask(updateTaskReq)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: async () => {
+          const title = this.translate.instant(
+            'modalUserFeedback.defaultSuccessTitle.updateTask'
+          );
+          const message = this.translate.instant(
+            'modalUserFeedback.defaultSuccessMessage'
+          );
+          this.messageService.showModal(
+            title,
+            message,
+            ModelUserFeedbackType.success
+          );
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          const title = this.translate.instant(
+            'modalUserFeedback.defaultErrorTitle'
+          );
+          const message = errorResponse.error.message;
+          this.messageService.showModal(
+            title,
+            message,
+            ModelUserFeedbackType.ERROR
+          );
+        },
+      });
+  }
+
+  private mapDataToUpdateTaskRequest(rawFormData: any): UpdateTaskRequest {
+    const cleanData: Partial<UpdateTaskRequest> = {};
+    const { startDate, startTime, dueDate, dueTime, _id, ...data } =
+      rawFormData;
+
+    data.taskId = _id;
+
+    Object.keys(data).forEach((formKey) => {
+      if (formKey) {
+        cleanData[formKey as keyof UpdateTaskRequest] = data[formKey];
+      }
+    });
+
+    if (this.isValidDate(startDate) && this.isValidTime(startTime)) {
+      cleanData.startDate = this.formatDateService.getDateFromDateTime(
+        startDate,
+        startTime
+      );
+    }
+
+    if (this.isValidDate(dueDate) && this.isValidTime(dueTime)) {
+      cleanData.dueDate = this.formatDateService.getDateFromDateTime(
+        dueDate,
+        dueTime
+      );
+    }
+
+    return cleanData as UpdateTaskRequest;
+  }
+
+  closeModal(): void {
     this.messageService.isModalShown.set(false);
-    // TODO: Call endpoints to update values
-    this.router.navigateByUrl('/tasks');
+    if (this.messageService.modalType() === ModelUserFeedbackType.success) {
+      this.router.navigateByUrl('/tasks');
+    }
+  }
+
+  private isValidDate(startDate: string): boolean {
+    return !!startDate && startDate !== 'N/A';
+  }
+
+  private isValidTime(startTime: string): boolean {
+    return !!startTime && startTime !== 'N/A';
+  }
+
+  get availableStates(): string[] {
+    return availableTaskStates;
   }
 }

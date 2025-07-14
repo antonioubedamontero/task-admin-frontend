@@ -2,7 +2,7 @@
   <form
     class="form w-screen sm:w-8/12"
     [formGroup]="taskDetailsForm"
-    (ngSubmit)="updateTask()"
+    (ngSubmit)="sendForm()"
   >
     <section id="form-new-task-data">
       <div class="form-group">
@@ -25,19 +25,17 @@
           {{ "updateTask.form.currentState.title" | translate }}
         </label>
         <div class="form-input-group">
-          <input
-            class="hidden"
-            type="text"
-            id="currentState"
-            formControlName="currentState"
-          />
-          <!-- Translated state -->
-          <input
+          <select
             class="input-field"
-            type="text"
-            id="currentStateTranslated"
-            formControlName="currentStateTranslated"
-          />
+            formControlName="currentState"
+            id="currentState"
+          >
+            @for (availableState of availableStates; track availableState) {
+            <option [value]="availableState">
+              {{ availableState | taskState }}
+            </option>
+            }
+          </select>
         </div>
       </div>
 
@@ -48,19 +46,17 @@
 
         <div class="flex sm:gap-2">
           <input
-            class="input-field-readonly"
+            class="input-field"
             type="date"
             id="startDate"
             formControlName="startDate"
-            readonly
           />
 
           <input
-            class="input-field-readonly"
+            class="input-field"
             type="time"
             id="startTime"
             formControlName="startTime"
-            readonly
           />
         </div>
       </div>
@@ -72,19 +68,17 @@
 
         <div class="flex sm:gap-2">
           <input
-            class="input-field-readonly"
+            class="input-field"
             type="date"
             id="dueDate"
             formControlName="dueDate"
-            readonly
           />
 
           <input
-            class="input-field-readonly"
+            class="input-field"
             type="time"
             id="dueTime"
             formControlName="dueTime"
-            readonly
           />
         </div>
       </div>
@@ -149,7 +143,7 @@
       <button
         class="w-full flex justify-center gap-2 blue-button"
         type="button"
-        (click)="closeForm()"
+        (click)="closeModal()"
       >
         <lucide-icon name="x"></lucide-icon>
         {{ "updateTask.closeBtn" | translate }}
@@ -157,3 +151,12 @@
     </div>
   </form>
 </div>
+
+@if (messageService.isModalShown()) {
+<app-modal-user-feedback
+  [modalType]="messageService.modalType()"
+  [title]="messageService.modalTitle()"
+  [description]="messageService.modalText()"
+  (closeModal)="closeModal()"
+/>
+}
