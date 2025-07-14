@@ -108,7 +108,35 @@ export default class UpdateTasksComponent {
   }
 
   resetForm(): void {
-    // TODO: Pending implementation
+    const {
+      name,
+      description,
+      currentState,
+      startDate: dateFrom,
+      dueDate: dateTo,
+    } = this.taskDetailValue()!;
+
+    const initialFormValue = {
+      name,
+      description,
+      currentState,
+      justification: '',
+      currentStateTranslated: this.translate.instant(
+        `taskStates.${currentState}`
+      ),
+    };
+
+    this.taskDetailsForm.setValue({
+      ...initialFormValue,
+      startDate: dateFrom
+        ? this.formatDateService.getDateFromDate(dateFrom)
+        : null,
+      startTime: dateFrom
+        ? this.formatDateService.getTimeFromDate(dateFrom)
+        : null,
+      dueDate: dateTo ? this.formatDateService.getDateFromDate(dateTo) : null,
+      dueTime: dateTo ? this.formatDateService.getTimeFromDate(dateTo) : null,
+    });
   }
 
   closeForm(): void {
