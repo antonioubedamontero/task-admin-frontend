@@ -1,2 +1,9 @@
 General:
   - Modify form services to get errors from each i18n fields.
+  - Dates are not saved / stored in proper format.
+
+Mini Task:
+  -  Show a confirmation dialog when deleting task.
+
+Update Task:
+  - Reset dates to initial values when current state is not started.

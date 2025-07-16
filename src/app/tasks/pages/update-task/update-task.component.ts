@@ -126,7 +126,6 @@ export default class UpdateTasksComponent implements OnInit {
           this.taskDetailsForm.controls;
 
         if (this.areDatesDisabled()) {
-          // startDate, startTime, dueDate, dueTime
           // TODO: Reset dates to initial values
           this.disableDatesAndTime([startDate, startTime, dueDate, dueTime]);
           return;
