@@ -106,6 +106,12 @@ export class MiniTaskComponent {
       });
   }
 
+  getFormatDateFromIsoDate(isoDate?: string): string {
+    const formattedDate =
+      this.formatDateService.getFormattedDateFromIsoDate(isoDate);
+    return formattedDate.length > 0 ? formattedDate : 'N/A';
+  }
+
   closeModal(): void {
     this.messageService.isModalShown.set(false);
     if (this.messageService.modalType() === ModelUserFeedbackType.success) {

@@ -6,24 +6,34 @@ import moment from 'moment';
   providedIn: 'root',
 })
 export class FormatDateService {
-  getDateFromDate(date?: string): string {
-    if (!date) return 'N/A';
-    return moment(date).format('DD-MM-YYYY');
+  getDateFromIsoString(dateIsoString: string): string | null {
+    if (!dateIsoString) return null;
+
+    const momentAsDate = moment(dateIsoString);
+    return momentAsDate.format('YYYY-MM-DD');
   }
 
-  getTimeFromDate(date?: string): string {
-    if (!date) return 'N/A';
-    return moment(date).format('HH:mm');
+  getTimeFromIsoString(dateIsoString: string): string | null {
+    if (!dateIsoString) return null;
+
+    const momentAsDate = moment(dateIsoString);
+    return momentAsDate.format('HH:mm:ss');
   }
 
-  getDateFromDateTime(date: string, time: string): string {
-    if (!date || !time) return '';
-    const dateTime = `${date}T${time}`;
-    return moment(dateTime, 'DD-MM-YYYY HH:mm').toISOString();
+  getDateIsoStringFormDateTime(
+    dateIsoString: string,
+    timeIsoString: string
+  ): string | null {
+    if (!dateIsoString || !timeIsoString) return null;
+
+    const dateTime = `${dateIsoString}T${timeIsoString}`;
+    const momentAsDate = moment(dateTime, 'YYYY-MM-DDTHH:mm:ss');
+    return momentAsDate.toISOString();
   }
 
-  getFormattedDate(date?: string): string {
-    if (!date) return 'N/A';
-    return moment(date).format('DD-MM-YYYY HH:mm');
+  getFormattedDateFromIsoDate(dateIsoString?: string): string {
+    if (!dateIsoString) return '';
+    const momentAsDate = moment(dateIsoString, 'YYYY-MM-DDTHH:mm:ss');
+    return momentAsDate.format('DD/MM/YYYY HH:mm:ss');
   }
 }

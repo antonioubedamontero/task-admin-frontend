@@ -6,6 +6,10 @@
   @apply bg-white p-4 border-1 border-gray-300 rounded;
 }
 
+.form-group-next-line {
+  @apply flex flex-col gap-1;
+}
+
 .form-group {
   @apply flex flex-row gap-5 justify-between items-center;
 }

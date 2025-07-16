@@ -5,9 +5,16 @@ import {
   DestroyRef,
   inject,
   effect,
+  OnInit,
+  signal,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -16,10 +23,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
 
 import { FormatDateService, HeaderService, TaskService } from '../../services';
-import { MessageService } from '../../../shared/services';
+import { FormService, MessageService } from '../../../shared/services';
 import {
   availableTaskStates,
+  FormDetail,
   TaskResponseItem,
+  TaskState,
   UpdateTaskRequest,
 } from '../../interfaces';
 import { TaskLogSectionComponent } from '../../components/task-log-section/task-log-section.component';
@@ -40,7 +49,7 @@ import { TaskStatePipe } from '../../pipes/task-state.pipe';
   templateUrl: './update-task.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class UpdateTasksComponent {
+export default class UpdateTasksComponent implements OnInit {
   translate = inject(TranslateService);
   headerService = inject(HeaderService);
   taskService = inject(TaskService);
@@ -50,6 +59,7 @@ export default class UpdateTasksComponent {
   destroyRef = inject(DestroyRef);
   route = inject(ActivatedRoute);
 
+  formService = inject(FormService);
   formatDateService = inject(FormatDateService);
 
   taskDetailsResource = rxResource({
@@ -67,11 +77,16 @@ export default class UpdateTasksComponent {
     }
   });
 
+  areDatesDisabled = signal<boolean>(true);
+  toggleDatesClasses = computed(() => {
+    return this.areDatesDisabled() ? 'input-field-readonly' : 'input-field';
+  });
+
   taskDetailsForm = this.fb.group({
     _id: [''],
     name: ['', [Validators.required]],
     description: ['', [Validators.required]],
-    currentState: ['', [Validators.required]],
+    currentState: [TaskState.CREATED, [Validators.required]],
     justification: ['', [Validators.required]],
     startDate: [''],
     startTime: [''],
@@ -81,6 +96,10 @@ export default class UpdateTasksComponent {
 
   constructor() {
     this.setHeaderTitle();
+  }
+
+  ngOnInit(): void {
+    this.manageCurrentStateTaskChangeValues();
   }
 
   private setHeaderTitle(): void {
@@ -95,37 +114,72 @@ export default class UpdateTasksComponent {
     this.headerService.setTitle(headerTitle);
   }
 
+  private manageCurrentStateTaskChangeValues(): void {
+    this.taskDetailsForm.controls.currentState.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((currentState) => {
+        const datesDisabled =
+          !currentState || currentState !== TaskState.STARTED;
+        this.areDatesDisabled.set(datesDisabled);
+
+        const { startDate, startTime, dueDate, dueTime } =
+          this.taskDetailsForm.controls;
+
+        if (this.areDatesDisabled()) {
+          // startDate, startTime, dueDate, dueTime
+          // TODO: Reset dates to initial values
+          this.disableDatesAndTime([startDate, startTime, dueDate, dueTime]);
+          return;
+        }
+
+        this.enableDatesAndTime([startDate, startTime, dueDate, dueTime]);
+      });
+  }
+
+  private disableDatesAndTime(datesAndTime: FormControl[]): void {
+    datesAndTime.forEach((control) => control.disable());
+  }
+
+  private enableDatesAndTime(datesAndTime: FormControl[]): void {
+    datesAndTime.forEach((control) => control.enable());
+  }
+
   setFormValue(taskDetailData: TaskResponseItem): void {
-    const { _id, name, description, currentState, startDate, dueDate } =
-      taskDetailData;
+    const {
+      _id,
+      name,
+      description,
+      currentState: currentStateData,
+      startDate,
+      dueDate,
+    } = taskDetailData;
 
     this.taskDetailsForm.patchValue({
       _id,
       name,
       description,
-      currentState,
+      // This value always exists
+      currentState: currentStateData ?? TaskState.CREATED,
       startDate: startDate
-        ? this.formatDateService.getDateFromDate(startDate)
+        ? this.formatDateService.getDateFromIsoString(startDate)
         : '',
       startTime: startDate
-        ? this.formatDateService.getTimeFromDate(startDate)
+        ? this.formatDateService.getTimeFromIsoString(startDate)
         : '',
-      dueDate: dueDate ? this.formatDateService.getDateFromDate(dueDate) : '',
-      dueTime: dueDate ? this.formatDateService.getTimeFromDate(dueDate) : '',
+      dueDate: dueDate
+        ? this.formatDateService.getDateFromIsoString(dueDate)
+        : '',
+      dueTime: dueDate
+        ? this.formatDateService.getTimeFromIsoString(dueDate)
+        : '',
     });
   }
 
   resetForm(): void {
-    const {
-      _id,
-      name,
-      description,
-      currentState,
-      startDate: dateFrom,
-      dueDate: dateTo,
-    } = this.taskDetailValue()!;
+    const { _id, name, description, currentState, startDate, dueDate } =
+      this.taskDetailValue()!;
 
-    const initialFormValue = {
+    const initialFormValue: Partial<FormDetail> = {
       _id,
       name,
       description,
@@ -133,16 +187,28 @@ export default class UpdateTasksComponent {
       justification: '',
     };
 
-    this.taskDetailsForm.setValue({
+    if (startDate && startDate.length > 0) {
+      initialFormValue['startDate'] =
+        this.formatDateService.getDateFromIsoString(startDate)!;
+    }
+
+    if (startDate && startDate.length > 0) {
+      initialFormValue['startTime'] =
+        this.formatDateService.getTimeFromIsoString(startDate)!;
+    }
+
+    if (dueDate && dueDate.length > 0) {
+      initialFormValue['dueDate'] =
+        this.formatDateService.getDateFromIsoString(dueDate)!;
+    }
+
+    if (dueDate && dueDate.length > 0) {
+      initialFormValue['dueTime'] =
+        this.formatDateService.getTimeFromIsoString(dueDate)!;
+    }
+
+    this.taskDetailsForm.reset({
       ...initialFormValue,
-      startDate: dateFrom
-        ? this.formatDateService.getDateFromDate(dateFrom)
-        : null,
-      startTime: dateFrom
-        ? this.formatDateService.getTimeFromDate(dateFrom)
-        : null,
-      dueDate: dateTo ? this.formatDateService.getDateFromDate(dateTo) : null,
-      dueTime: dateTo ? this.formatDateService.getTimeFromDate(dateTo) : null,
     });
   }
 
@@ -197,24 +263,28 @@ export default class UpdateTasksComponent {
 
     data.taskId = _id;
 
-    Object.keys(data).forEach((formKey) => {
-      if (formKey) {
+    Object.keys(data).forEach((formKey: string) => {
+      const formValue = data[formKey];
+      const invalidValues = [null, ''];
+      const isDataValueValid =
+        formValue && formValue !== null && !invalidValues.includes(formValue);
+      if (isDataValueValid) {
         cleanData[formKey as keyof UpdateTaskRequest] = data[formKey];
       }
     });
 
     if (this.isValidDate(startDate) && this.isValidTime(startTime)) {
-      cleanData.startDate = this.formatDateService.getDateFromDateTime(
+      cleanData.startDate = this.formatDateService.getDateIsoStringFormDateTime(
         startDate,
         startTime
-      );
+      )!;
     }
 
     if (this.isValidDate(dueDate) && this.isValidTime(dueTime)) {
-      cleanData.dueDate = this.formatDateService.getDateFromDateTime(
+      cleanData.dueDate = this.formatDateService.getDateIsoStringFormDateTime(
         dueDate,
         dueTime
-      );
+      )!;
     }
 
     return cleanData as UpdateTaskRequest;
@@ -228,12 +298,24 @@ export default class UpdateTasksComponent {
   }
 
   private isValidDate(startDate: string): boolean {
-    return !!startDate && startDate !== 'N/A';
+    return !!startDate && startDate !== '';
   }
 
   private isValidTime(startTime: string): boolean {
-    return !!startTime && startTime !== 'N/A';
+    return !!startTime && startTime !== '';
   }
+
+  setTimeToForm(field: string, event: any) {
+    const time = event.target.value;
+    this.taskDetailsForm.get(field)?.setValue(time);
+  }
+
+  setDateToForm(field: string, event: any) {
+    const date = event.target.value;
+    this.taskDetailsForm.get(field)?.setValue(date);
+  }
+
+  // getters
 
   get availableStates(): string[] {
     return availableTaskStates;
