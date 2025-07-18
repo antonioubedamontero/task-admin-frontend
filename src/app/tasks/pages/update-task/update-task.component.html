@@ -1,7 +1,185 @@
-<p>
-  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel commodi magnam
-  voluptas blanditiis voluptatem omnis molestiae doloribus? Eveniet harum
-  impedit ipsum, voluptates a inventore cupiditate id, explicabo nostrum eos,
-  voluptatum officia illo. Suscipit, culpa et. Dignissimos culpa animi error
-  velit!
-</p>
+<div class="mt-12 min-h-screen w-full flex justify-center items-center">
+  <form
+    class="form w-screen sm:w-8/12"
+    [formGroup]="taskDetailsForm"
+    (ngSubmit)="sendForm()"
+  >
+    <section id="form-new-task-data">
+      <div class="form-group">
+        <label class="form-label" for="name">
+          {{ "updateTask.form.name.title" | translate }}
+        </label>
+        <div class="form-input-group">
+          <input
+            class="input-field"
+            type="text"
+            id="name"
+            formControlName="name"
+            [placeholder]="'updateTask.form.name.placeholder' | translate"
+          />
+          @if (formService.hasControlErrors(taskDetailsForm, 'name')) {
+          <span class="form-input-error-msg">
+            {{ formService.getFormControlErrors(taskDetailsForm, "name") }}
+          </span>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="currentState">
+          {{ "updateTask.form.currentState.title" | translate }}
+        </label>
+        <div class="form-input-group">
+          <select
+            class="input-field"
+            formControlName="currentState"
+            id="currentState"
+          >
+            @for (availableState of availableStates; track availableState) {
+            <option [value]="availableState">
+              {{ availableState | taskState }}
+            </option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="flex gap-1 sm:gap-4 justify-between items-center">
+        <label class="font-medium" for="startDate">
+          {{ "updateTask.form.startDate.title" | translate }}
+        </label>
+
+        <div class="flex sm:gap-2">
+          <input
+            [class]="toggleDatesClasses()"
+            type="date"
+            id="startDate"
+            formControlName="startDate"
+            (change)="setDateToForm('startDate', $event)"
+          />
+
+          <input
+            [class]="toggleDatesClasses()"
+            type="time"
+            id="startTime"
+            formControlName="startTime"
+            (change)="setTimeToForm('startTime', $event)"
+          />
+        </div>
+      </div>
+
+      <div class="flex gap-1 sm:gap-4 justify-between items-center">
+        <label class="font-medium" for="dueDate">
+          {{ "updateTask.form.dueDate.title" | translate }}
+        </label>
+
+        <div class="flex sm:gap-2">
+          <input
+            [class]="toggleDatesClasses()"
+            type="date"
+            id="dueDate"
+            formControlName="dueDate"
+            (change)="setDateToForm('dueDate', $event)"
+          />
+
+          <input
+            [class]="toggleDatesClasses()"
+            type="time"
+            id="dueTime"
+            formControlName="dueTime"
+            (change)="setTimeToForm('dueTime', $event)"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="justification">
+          {{ "updateTask.form.justification.title" | translate }}
+        </label>
+        <div class="form-input-group">
+          <textarea
+            class="input-field"
+            id="justification"
+            formControlName="justification"
+            rows="4"
+            [placeholder]="
+              'updateTask.form.justification.placeholder' | translate
+            "
+          >
+          </textarea>
+          @if (formService.hasControlErrors(taskDetailsForm, 'justification')) {
+          <span class="form-input-error-msg">
+            {{
+              formService.getFormControlErrors(taskDetailsForm, "justification")
+            }}
+          </span>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="description">
+          {{ "updateTask.form.description.title" | translate }}
+        </label>
+        <div class="form-input-group">
+          <textarea
+            class="input-field"
+            id="description"
+            formControlName="description"
+            rows="4"
+            [placeholder]="
+              'updateTask.form.description.placeholder' | translate
+            "
+          >
+          </textarea>
+          @if (formService.hasControlErrors(taskDetailsForm, 'description')) {
+          <span class="form-input-error-msg">
+            {{
+              formService.getFormControlErrors(taskDetailsForm, "description")
+            }}
+          </span>
+          }
+        </div>
+      </div>
+    </section>
+
+    <app-task-log-section [logStates]="taskDetailValue()?.logStates ?? []" />
+
+    <div class="mt-4 flex justify-center gap-2">
+      <button
+        class="w-full flex justify-center gap-2 blue-button"
+        type="submit"
+      >
+        <lucide-icon name="save"></lucide-icon>
+        {{ "updateTask.saveBtn" | translate }}
+      </button>
+
+      <button
+        class="w-full flex justify-center gap-2 blue-button"
+        type="button"
+        (click)="resetForm()"
+      >
+        <lucide-icon name="list-restart"></lucide-icon>
+        {{ "updateTask.cleanFormBtn" | translate }}
+      </button>
+
+      <button
+        class="w-full flex justify-center gap-2 blue-button"
+        type="button"
+        (click)="closeModal()"
+      >
+        <lucide-icon name="x"></lucide-icon>
+        {{ "updateTask.closeBtn" | translate }}
+      </button>
+    </div>
+  </form>
+</div>
+
+@if (messageService.isModalShown()) {
+<app-modal-user-feedback
+  [modalType]="messageService.modalType()"
+  [title]="messageService.modalTitle()"
+  [description]="messageService.modalText()"
+  (closeModal)="closeModal()"
+/>
+}

@@ -1,6 +1,7 @@
 <article class="min-h-screen">
-  <h2 class="py-2 text-center font-bold bg-sky-500 text-white">
-    {{ `tasks.taskStates.${state()}` | translate }}
+  <h2 class="py-2 flex justify-center gap-2 font-bold bg-sky-500 text-white">
+    <lucide-icon [name]="icon()"></lucide-icon>
+    <span>{{ `tasks.taskStates.${state()}` | translate }}</span>
   </h2>
 
   <hr class="w-full border-1 border-gray-500" />

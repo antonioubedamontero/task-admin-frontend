@@ -55,7 +55,7 @@
     }
   },
   "taskDetails": {
-    "title": "Detalle de la tarea",
+    "title": "Detalle de la tarea: {{taskName}}",
     "form": {
       "name": "Nombre",
       "description": "Descripción",
@@ -83,10 +83,36 @@
     }
   },
   "updateTask": {
-    "title": "Actualizar tarea"
+    "title": "Actualizar tarea: {{taskName}}",
+    "form": {
+      "name": {
+        "title": "Nombre",
+        "placeholder": "nombre de la tarea"
+      },
+      "description": {
+        "title": "Descripción",
+        "placeholder": "descripción de la tarea"
+      },
+      "currentState": {
+        "title": "Estado"
+      },
+      "justification": {
+        "title": "Justificación",
+        "placeholder": "motivo del cambio"
+      },
+      "startDate": {
+        "title": "Fecha desde"
+      },
+      "dueDate": {
+        "title": "Fecha hasta"
+      }
+    },
+    "saveBtn": "Guardar",
+    "cleanFormBtn": "Resetear",
+    "closeBtn": "Cerrar"
   },
   "tasks": {
-    "title": "Tareas de {{name}}",
+    "title": "Tareas de: {{name}}",
     "addTaskBtn": "Agregar tarea",
     "taskStates": {
       "created": "Creada",
@@ -105,7 +131,8 @@
   "modalUserFeedback": {
     "defaultSuccessTitle": {
       "newTask": "Nueva tarea creada",
-      "deleteTask": "La tarea ha sido eliminada"
+      "deleteTask": "La tarea ha sido eliminada",
+      "updateTask": "La tarea se ha actualizado"
     },
     "defaultCloseBtnTitle": "Cerrar",
     "defaultSuccessMessage": "Operación realizada correctamente",

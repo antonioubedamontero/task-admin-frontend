@@ -3,10 +3,11 @@
     class="bg-blue-700 opacity-75 text-white p-2 rounded-tl-sm rounded-tr-sm"
   >
     <button
-      class="w-full flex items-center justify-between"
+      class="w-full flex items-center justify-center gap-2"
       type="button"
       (click)="toggleIsLogOpen()"
     >
+      <lucide-icon name="album"></lucide-icon>
       <span class="text-center w-full">
         {{ "taskLogSection.title" | translate }}
       </span>
@@ -37,11 +38,19 @@
       <tbody class="border-cell">
         <tr>
           <td class="border-cell">
-            {{ formatDateService.getFormattedDate(logStateItem.startDate) }}
+            {{
+              formatDateService.getFormattedDateFromIsoDate(
+                logStateItem.startDate
+              )
+            }}
           </td>
           <td class="border-cell">{{ logStateItem.state | taskState }}</td>
           <td class="border-cell">
-            {{ formatDateService.getFormattedDate(logStateItem.endDate) }}
+            {{
+              formatDateService.getFormattedDateFromIsoDate(
+                logStateItem.endDate
+              )
+            }}
           </td>
           <td class="border-cell">{{ logStateItem.justification }}</td>
         </tr>

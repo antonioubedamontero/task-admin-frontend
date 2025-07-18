@@ -67,11 +67,13 @@ export class MiniTaskComponent {
   }
 
   private manageClickEditBtn(): void {
-    // TODO: Pending implementation
+    this.router.navigate(['/tasks', this.taskItem()._id, 'edit']);
   }
 
   private manageClickDeleteBtn(): void {
     const taskId = this.taskItem()._id;
+
+    // TODO: should show a confirmation dialog
 
     this.taskService
       .deleteTask(taskId)
@@ -102,6 +104,12 @@ export class MiniTaskComponent {
           );
         },
       });
+  }
+
+  getFormatDateFromIsoDate(isoDate?: string): string {
+    const formattedDate =
+      this.formatDateService.getFormattedDateFromIsoDate(isoDate);
+    return formattedDate.length > 0 ? formattedDate : 'N/A';
   }
 
   closeModal(): void {

@@ -6,18 +6,51 @@ import moment from 'moment';
   providedIn: 'root',
 })
 export class FormatDateService {
-  getDateFromDate(date?: string): string {
-    if (!date) return 'N/A';
-    return moment(date).format('DD-MM-YYYY');
+  getDate(date: string, isLocalDate: boolean): string | null {
+    if (!date) return null;
+
+    if (isLocalDate) {
+      return moment(date).format('YYYY-MM-DD');
+    }
+
+    const momentAsIsoDate = moment.utc(date);
+    return momentAsIsoDate.local().format('YYYY-MM-DD');
   }
 
-  getTimeFromDate(date?: string): string {
-    if (!date) return 'N/A';
-    return moment(date).format('HH:mm');
+  getTime(date: string, isLocalDate: boolean): string | null {
+    if (!date) return null;
+
+    if (isLocalDate) {
+      return moment(date).format('HH:mm:ss');
+    }
+
+    const momentAsIsoDate = moment.utc(date);
+    return momentAsIsoDate.local().format('HH:mm:ss');
   }
 
-  getFormattedDate(date?: string): string {
-    if (!date) return 'N/A';
-    return moment(date).format('DD-MM-YYYY HH:mm');
+  getLocalDateFromIsoString(
+    dateIsoString: string,
+    timeIsoString: string
+  ): string | null {
+    if (!dateIsoString || !timeIsoString) return null;
+
+    const dateTime = `${dateIsoString}T${timeIsoString}`;
+    const momentAsDate = moment(dateTime, 'YYYY-MM-DDTHH:mm:ss');
+    return momentAsDate.local().format('DD/MM/YYYY HH:mm');
+  }
+
+  getIsoStringFromLocalDate(
+    localDate: string,
+    localTime: string
+  ): string | null {
+    if (!localDate || !localTime) return null;
+    const dateTime = `${localDate}T${localTime}`;
+    return moment(dateTime, 'YYYY-MM-DDTHH:mm:ss').toISOString();
+  }
+
+  getFormattedDateFromIsoDate(dateIsoString?: string): string {
+    if (!dateIsoString) return '';
+    const momentAsDate = moment.utc(dateIsoString);
+    return momentAsDate.local().format('DD/MM/YYYY HH:mm');
   }
 }

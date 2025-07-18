@@ -16,7 +16,7 @@ export interface TaskResponseItem {
   startDate?: string;
   dueDate?: string;
   logStates: LogStateResponse[];
-  currentState: string;
+  currentState: TaskState;
   createdAt: string;
   updatedAt: string;
 }

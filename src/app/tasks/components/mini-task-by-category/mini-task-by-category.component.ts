@@ -10,14 +10,17 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MiniTaskItem, TaskState } from '../../interfaces';
 import { MiniTaskComponent } from '../mini-task/mini-task.component';
 
+import { LucideAngularModule } from 'lucide-angular';
+
 @Component({
   selector: 'app-mini-task-by-category',
-  imports: [TranslateModule, MiniTaskComponent],
+  imports: [TranslateModule, LucideAngularModule, MiniTaskComponent],
   templateUrl: './mini-task-by-category.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MiniTaskByCategoryComponent {
   title = input.required<string>();
+  icon = input.required<string>();
   state = input.required<TaskState>();
   taskItems = input.required<MiniTaskItem[]>();
 

@@ -55,7 +55,7 @@
     }
   },
   "taskDetails": {
-    "title": "Task details",
+    "title": "Task Details: {{taskName}}",
     "form": {
       "name": "Name",
       "description": "Description",
@@ -83,10 +83,36 @@
     }
   },
   "updateTask": {
-    "title": "Update Task"
+    "title": "Update task: {{taskName}}",
+    "form": {
+      "name": {
+        "title": "Name",
+        "placeholder": "Task name"
+      },
+      "description": {
+        "title": "Description",
+        "placeholder": "Task description"
+      },
+      "currentState": {
+        "title": "Status"
+      },
+      "justification": {
+        "title": "Justification",
+        "placeholder": "Reason for change"
+      },
+      "startDate": {
+        "title": "From date"
+      },
+      "dueDate": {
+        "title": "To date"
+      }
+    },
+    "saveBtn": "Save",
+    "cleanFormBtn": "Reset",
+    "closeBtn": "Close"
   },
   "tasks": {
-    "title": "Tasks {{name}}",
+    "title": "Tasks from: {{name}}",
     "addTaskBtn": "Add Task",
     "taskStates": {
       "created": "Created",
@@ -101,28 +127,29 @@
     "startDate": "Start Date:",
     "dueDate": "End Date:"
   },
-  "logout": "Logout",
+  "logout": "Exit",
   "modalUserFeedback": {
     "defaultSuccessTitle": {
       "newTask": "New Task Created",
-      "deleteTask": "Task has been deleted"
+      "deleteTask": "Task has been deleted",
+      "updateTask": "Task has been updated"
     },
     "defaultCloseBtnTitle": "Close",
     "defaultSuccessMessage": "Operation completed successfully",
-    "defaultErrorTitle": "An error has occurred. an error"
+    "defaultErrorTitle": "An error occurred. error"
   },
   "errors": {
     "email": "The field is not a valid email",
     "required": "The field is required",
     "other": "Undefined error",
     "emailTaken": "User not available",
-    "distinctPasswd": "The passwords do not match"
+    "distinctPasswd": "Passwords do not match"
   },
   "taskStates": {
     "created": "Created",
-    "started": "Initiated",
-    "ended": "Finished",
+    "started": "Started",
+    "ended": "Completed",
     "paused": "Paused",
-    "cancelled": "Cancelled"
+    "canceled": "Canceled"
   }
 }
