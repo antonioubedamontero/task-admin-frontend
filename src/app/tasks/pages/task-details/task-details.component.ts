@@ -13,6 +13,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
+import moment from 'moment';
 
 import { FormatDateService, HeaderService, TaskService } from '../../services';
 import { MessageService } from '../../../shared/services';
@@ -96,17 +97,13 @@ export default class TaskDetailsComponent {
         `taskStates.${currentState}`
       ),
       startDate: startDate
-        ? this.formatDateService.getDateFromIsoString(startDate)
+        ? this.formatDateService.getDate(startDate, false)
         : '',
       startTime: startDate
-        ? this.formatDateService.getTimeFromIsoString(startDate)
+        ? this.formatDateService.getTime(startDate, false)
         : '',
-      dueDate: dueDate
-        ? this.formatDateService.getDateFromIsoString(dueDate)
-        : '',
-      dueTime: dueDate
-        ? this.formatDateService.getTimeFromIsoString(dueDate)
-        : '',
+      dueDate: dueDate ? this.formatDateService.getDate(dueDate, false) : '',
+      dueTime: dueDate ? this.formatDateService.getTime(dueDate, false) : '',
     });
   }
 

@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.9.0] - 2025-07-16
+## [0.9.0] - 2025-07-18
 
 - Added update task page.
 - Change styles for non midifiable form fields.
@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Added close button in update task.
 - Added name in task detail and task update pages.
 - Change new task styles in form.
+- Bug fixed.
 
 ## [0.8.0] - 2025-07-13
 

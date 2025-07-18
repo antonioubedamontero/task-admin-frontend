@@ -21,6 +21,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
+import moment from 'moment';
 
 import { FormatDateService, HeaderService, TaskService } from '../../services';
 import { FormService, MessageService } from '../../../shared/services';
@@ -36,6 +37,13 @@ import { ModelUserFeedbackType } from '../../../shared/interfaces';
 import { ModalUserFeedbackComponent } from '../../../shared/components/modal-user-feedback/modal-user-feedback.component';
 import { TaskStatePipe } from '../../pipes/task-state.pipe';
 
+// Local interface
+interface Dates {
+  startDate: FormControl;
+  startTime: FormControl;
+  dueDate: FormControl;
+  dueTime: FormControl;
+}
 @Component({
   selector: 'app-update-tasks',
   imports: [
@@ -125,22 +133,45 @@ export default class UpdateTasksComponent implements OnInit {
         const { startDate, startTime, dueDate, dueTime } =
           this.taskDetailsForm.controls;
 
+        const dates: Dates = { startDate, startTime, dueDate, dueTime };
         if (this.areDatesDisabled()) {
-          // TODO: Reset dates to initial values
-          this.disableDatesAndTime([startDate, startTime, dueDate, dueTime]);
+          this.resetDatesToInitialValues();
+          this.disableDatesAndTime(dates);
           return;
         }
 
-        this.enableDatesAndTime([startDate, startTime, dueDate, dueTime]);
+        this.enableDatesAndTime(dates);
       });
   }
 
-  private disableDatesAndTime(datesAndTime: FormControl[]): void {
-    datesAndTime.forEach((control) => control.disable());
+  private resetDatesToInitialValues(): void {
+    const isoStartDate = this.taskDetailValue()?.startDate ?? undefined;
+    const isoDueDate = this.taskDetailValue()?.dueDate ?? undefined;
+
+    this.taskDetailsForm.patchValue({
+      startDate: isoStartDate
+        ? this.formatDateService.getDate(isoStartDate, false)
+        : null,
+      startTime: isoStartDate
+        ? this.formatDateService.getTime(isoStartDate, false)
+        : null,
+      dueDate: isoDueDate
+        ? this.formatDateService.getDate(isoDueDate, false)
+        : null,
+      dueTime: isoDueDate
+        ? this.formatDateService.getTime(isoDueDate, false)
+        : null,
+    });
   }
 
-  private enableDatesAndTime(datesAndTime: FormControl[]): void {
-    datesAndTime.forEach((control) => control.enable());
+  private disableDatesAndTime(dates: Dates): void {
+    const dateValues: FormControl[] = Object.values(dates);
+    dateValues.forEach((control) => control.disable());
+  }
+
+  private enableDatesAndTime(dates: Dates): void {
+    const dateValues: FormControl[] = Object.values(dates);
+    dateValues.forEach((control) => control.enable());
   }
 
   setFormValue(taskDetailData: TaskResponseItem): void {
@@ -159,18 +190,10 @@ export default class UpdateTasksComponent implements OnInit {
       description,
       // This value always exists
       currentState: currentStateData ?? TaskState.CREATED,
-      startDate: startDate
-        ? this.formatDateService.getDateFromIsoString(startDate)
-        : '',
-      startTime: startDate
-        ? this.formatDateService.getTimeFromIsoString(startDate)
-        : '',
-      dueDate: dueDate
-        ? this.formatDateService.getDateFromIsoString(dueDate)
-        : '',
-      dueTime: dueDate
-        ? this.formatDateService.getTimeFromIsoString(dueDate)
-        : '',
+      startDate: startDate ? moment(startDate).format('YYYY-MM-DD') : '',
+      startTime: startDate ? moment(startDate).format('HH:mm:ss') : '',
+      dueDate: dueDate ? moment(dueDate).format('YYYY-MM-DD') : '',
+      dueTime: dueDate ? moment(dueDate).format('HH:mm:ss') : '',
     });
   }
 
@@ -187,23 +210,19 @@ export default class UpdateTasksComponent implements OnInit {
     };
 
     if (startDate && startDate.length > 0) {
-      initialFormValue['startDate'] =
-        this.formatDateService.getDateFromIsoString(startDate)!;
+      initialFormValue['startDate'] = moment(startDate).format('YYYY-MM-DD');
     }
 
     if (startDate && startDate.length > 0) {
-      initialFormValue['startTime'] =
-        this.formatDateService.getTimeFromIsoString(startDate)!;
+      initialFormValue['startTime'] = moment(startDate).format('HH:mm:ss');
     }
 
     if (dueDate && dueDate.length > 0) {
-      initialFormValue['dueDate'] =
-        this.formatDateService.getDateFromIsoString(dueDate)!;
+      initialFormValue['dueDate'] = moment(dueDate).format('YYYY-MM-DD');
     }
 
     if (dueDate && dueDate.length > 0) {
-      initialFormValue['dueTime'] =
-        this.formatDateService.getTimeFromIsoString(dueDate)!;
+      initialFormValue['dueTime'] = moment(dueDate).format('HH:mm:ss');
     }
 
     this.taskDetailsForm.reset({
@@ -212,8 +231,9 @@ export default class UpdateTasksComponent implements OnInit {
   }
 
   sendForm(): void {
-    if (this.taskDetailsForm.invalid) {
+    if (!this.taskDetailsForm.valid) {
       this.taskDetailsForm.markAllAsTouched();
+      return;
     }
 
     const updateTaskReq = this.mapDataToUpdateTaskRequest(
@@ -273,14 +293,14 @@ export default class UpdateTasksComponent implements OnInit {
     });
 
     if (this.isValidDate(startDate) && this.isValidTime(startTime)) {
-      cleanData.startDate = this.formatDateService.getDateIsoStringFormDateTime(
+      cleanData.startDate = this.formatDateService.getIsoStringFromLocalDate(
         startDate,
         startTime
       )!;
     }
 
     if (this.isValidDate(dueDate) && this.isValidTime(dueTime)) {
-      cleanData.dueDate = this.formatDateService.getDateIsoStringFormDateTime(
+      cleanData.dueDate = this.formatDateService.getIsoStringFromLocalDate(
         dueDate,
         dueTime
       )!;
