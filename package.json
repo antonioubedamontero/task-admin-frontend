@@ -4,12 +4,16 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
+    "start:dev": "ng serve --host 0.0.0.0 --port 4200",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "docker-build:prod": "docker build -t task-admin-frontend-prod -f Dockerfile.prod .",
     "docker-run-container:prod": "docker run -d -p 8080:80 task-admin-frontend-prod",
     "create-app:prod": "npm run docker-build:prod && npm run docker-run-container:prod",
+    "docker-build:desa": "docker build -t task-admin-frontend-desa -f Dockerfile.dev .",
+    "docker-run-container:desa": "docker run -d -p 4200:4200 -v .:/app task-admin-frontend-desa",
+    "create-app:desa": "npm run docker-build:desa && npm run docker-run-container:desa",
     "test": "ng test",
     "lint": "ng lint"
   },

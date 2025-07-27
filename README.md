@@ -10,6 +10,28 @@ To start a linter to prevent some errors:
 npm run lint
 ```
 
+## 1.- Working in development mode:
+
+### - Create application within Docker Container:
+
+```bash
+npm run create-app:desa
+```
+
+App is available in: http://localhost:4200
+
+### - Stop app container:
+
+```bash
+docker stop task-admin-frontend-desa
+```
+
+### - Run existing app container:
+
+```bash
+docker start task-admin-frontend-desa
+```
+
 ## 2.- Working in production mode:
 
 ### - Create application within Docker Container:

@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - Dockerize application.
 - Add link to register from login and login to register.
+- Fix lint errors.
 
 ## [1.0.0] - 2025-07-21
 
