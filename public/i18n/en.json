@@ -12,6 +12,7 @@
       }
     },
     "loginButton": "Enter",
+    "createAccount": "Create a new account",
     "dialogMessageError": {
       "title": "Error logging in"
     }
@@ -41,6 +42,7 @@
       }
     },
     "registerButton": "User Registration",
+    "navigateLogin": "Go to login",
     "dialogMessageError": {
       "title": "Registration Error"
     }

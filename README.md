@@ -10,27 +10,27 @@ To start a linter to prevent some errors:
 npm run lint
 ```
 
-## Development server
+## 2.- Working in production mode:
 
-To start a local development server, run:
-
-```bash
-npm run start
-```
-
-Once the server is running, your browser will navigate to `http://localhost:4200/`.
-
-The application will automatically reload whenever you modify any of the source files.
-
-## Building application
-
-To build the project run:
+### - Create application within Docker Container:
 
 ```bash
-npm run build
+npm run create-app:prod
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+App is available in: http://localhost:8080
+
+### - Stop app container:
+
+```bash
+docker stop task-admin-frontend-prod
+```
+
+### - Run existing app container:
+
+```bash
+docker start task-admin-frontend-prod
+```
 
 ## Running unit tests
 

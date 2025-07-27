@@ -1,7 +1,7 @@
 import { TaskState } from './task-state.interface';
 
 export interface UpdateTaskRequest {
-  _id: string;
+  taskId: string;
   name?: string;
   currentState: TaskState;
   justification?: string;
