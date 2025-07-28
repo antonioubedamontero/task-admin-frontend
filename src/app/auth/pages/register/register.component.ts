@@ -5,7 +5,7 @@ import {
   inject,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -18,7 +18,12 @@ import { ModelUserFeedbackType } from '../../../shared/interfaces';
 import { ModalUserFeedbackComponent } from '../../../shared/components/modal-user-feedback/modal-user-feedback.component';
 @Component({
   selector: 'app-register',
-  imports: [TranslateModule, ReactiveFormsModule, ModalUserFeedbackComponent],
+  imports: [
+    TranslateModule,
+    ReactiveFormsModule,
+    RouterLink,
+    ModalUserFeedbackComponent,
+  ],
   templateUrl: './register.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

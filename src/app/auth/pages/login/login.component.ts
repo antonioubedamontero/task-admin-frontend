@@ -5,7 +5,7 @@ import {
   inject,
 } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -19,7 +19,12 @@ import { ModalUserFeedbackComponent } from '../../../shared/components/modal-use
 import { ModelUserFeedbackType } from '../../../shared/interfaces';
 @Component({
   selector: 'app-login',
-  imports: [TranslateModule, ReactiveFormsModule, ModalUserFeedbackComponent],
+  imports: [
+    TranslateModule,
+    ReactiveFormsModule,
+    ModalUserFeedbackComponent,
+    RouterLink,
+  ],
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

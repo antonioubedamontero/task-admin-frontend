@@ -37,13 +37,26 @@ import { ModelUserFeedbackType } from '../../../shared/interfaces';
 import { ModalUserFeedbackComponent } from '../../../shared/components/modal-user-feedback/modal-user-feedback.component';
 import { TaskStatePipe } from '../../pipes/task-state.pipe';
 
-// Local interface
+// Local interfaces
 interface Dates {
   startDate: FormControl;
   startTime: FormControl;
   dueDate: FormControl;
   dueTime: FormControl;
 }
+
+interface TaskDetailForm {
+  _id: string;
+  name: string;
+  description: string;
+  currentState: TaskState;
+  justification: string;
+  startDate: string;
+  startTime: string;
+  dueDate: string;
+  dueTime: string;
+}
+
 @Component({
   selector: 'app-update-tasks',
   imports: [
@@ -236,11 +249,22 @@ export default class UpdateTasksComponent implements OnInit {
       return;
     }
 
-    const updateTaskReq = this.mapDataToUpdateTaskRequest(
-      this.taskDetailsForm.value
+    const cleanedData = this.cleanData(
+      this.taskDetailsForm.value as TaskDetailForm
     );
 
+    const updateTaskReq = this.mapDataToUpdateTaskRequest(cleanedData);
+
     this.updateTask(updateTaskReq);
+  }
+
+  private cleanData(rawFormData: TaskDetailForm): TaskDetailForm {
+    return Object.keys(rawFormData).reduce((cleanObject, currentKey) => {
+      const keyValue = rawFormData[currentKey as keyof TaskDetailForm];
+      if (keyValue === null || keyValue === undefined || keyValue === '')
+        return cleanObject;
+      return { ...cleanObject, [currentKey]: keyValue };
+    }, {}) as TaskDetailForm;
   }
 
   private updateTask(updateTaskReq: UpdateTaskRequest): void {
@@ -275,38 +299,29 @@ export default class UpdateTasksComponent implements OnInit {
       });
   }
 
-  private mapDataToUpdateTaskRequest(rawFormData: any): UpdateTaskRequest {
-    const cleanData: Partial<UpdateTaskRequest> = {};
+  private mapDataToUpdateTaskRequest(
+    cleanFormData: TaskDetailForm
+  ): UpdateTaskRequest {
     const { startDate, startTime, dueDate, dueTime, _id, ...data } =
-      rawFormData;
+      cleanFormData;
 
-    data.taskId = _id;
+    const mappedData: Partial<UpdateTaskRequest> = { taskId: _id!, ...data };
 
-    Object.keys(data).forEach((formKey: string) => {
-      const formValue = data[formKey];
-      const invalidValues = [null, ''];
-      const isDataValueValid =
-        formValue && formValue !== null && !invalidValues.includes(formValue);
-      if (isDataValueValid) {
-        cleanData[formKey as keyof UpdateTaskRequest] = data[formKey];
-      }
-    });
-
-    if (this.isValidDate(startDate) && this.isValidTime(startTime)) {
-      cleanData.startDate = this.formatDateService.getIsoStringFromLocalDate(
-        startDate,
-        startTime
+    if (startDate && startTime) {
+      mappedData.startDate = this.formatDateService.getIsoStringFromLocalDate(
+        startDate!,
+        startTime!
       )!;
     }
 
-    if (this.isValidDate(dueDate) && this.isValidTime(dueTime)) {
-      cleanData.dueDate = this.formatDateService.getIsoStringFromLocalDate(
-        dueDate,
-        dueTime
+    if (dueDate && dueTime) {
+      mappedData.dueDate = this.formatDateService.getIsoStringFromLocalDate(
+        dueDate!,
+        dueTime!
       )!;
     }
 
-    return cleanData as UpdateTaskRequest;
+    return mappedData as UpdateTaskRequest;
   }
 
   closeModal(): void {
@@ -316,21 +331,11 @@ export default class UpdateTasksComponent implements OnInit {
     }
   }
 
-  private isValidDate(startDate: string): boolean {
-    return !!startDate && startDate !== '';
-  }
-
-  private isValidTime(startTime: string): boolean {
-    return !!startTime && startTime !== '';
-  }
-
-  setTimeToForm(field: string, event: any) {
-    const time = event.target.value;
+  setTimeToForm(field: string, time: string) {
     this.taskDetailsForm.get(field)?.setValue(time);
   }
 
-  setDateToForm(field: string, event: any) {
-    const date = event.target.value;
+  setDateToForm(field: string, date: string) {
     this.taskDetailsForm.get(field)?.setValue(date);
   }
 
