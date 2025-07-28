@@ -51,19 +51,21 @@
 
         <div class="flex sm:gap-2">
           <input
+            #startDate
             [class]="toggleDatesClasses()"
             type="date"
             id="startDate"
             formControlName="startDate"
-            (change)="setDateToForm('startDate', $event)"
+            (change)="setDateToForm('startDate', startDate.value)"
           />
 
           <input
+            #startTime
             [class]="toggleDatesClasses()"
             type="time"
             id="startTime"
             formControlName="startTime"
-            (change)="setTimeToForm('startTime', $event)"
+            (change)="setTimeToForm('startTime', startTime.value)"
           />
         </div>
       </div>
@@ -75,19 +77,21 @@
 
         <div class="flex sm:gap-2">
           <input
+            #dueDate
             [class]="toggleDatesClasses()"
             type="date"
             id="dueDate"
             formControlName="dueDate"
-            (change)="setDateToForm('dueDate', $event)"
+            (change)="setDateToForm('dueDate', dueDate.value)"
           />
 
           <input
+            #dueTime
             [class]="toggleDatesClasses()"
             type="time"
             id="dueTime"
             formControlName="dueTime"
-            (change)="setTimeToForm('dueTime', $event)"
+            (change)="setTimeToForm('dueTime', dueTime.value)"
           />
         </div>
       </div>

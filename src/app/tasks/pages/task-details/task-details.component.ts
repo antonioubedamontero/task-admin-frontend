@@ -13,7 +13,6 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
-import moment from 'moment';
 
 import { FormatDateService, HeaderService, TaskService } from '../../services';
 import { MessageService } from '../../../shared/services';
