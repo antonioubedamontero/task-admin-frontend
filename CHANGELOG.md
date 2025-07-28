@@ -4,9 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [2.0.0] - 2025-07-28
 
-- Dockerize application.
-- Add link to register from login and login to register.
-- Fix lint errors.
+- Dockerize application in development and production environment.
+- Add link to register from login and login to register pages.
+- Fix lint errors and minnor refactors.
+- Added scripts and README update notes.
 
 ## [1.0.0] - 2025-07-21
 
