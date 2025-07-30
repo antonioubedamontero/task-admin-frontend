@@ -1,6 +1,6 @@
 {
   "name": "task-admin-frontend",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
@@ -14,7 +14,7 @@
     "docker-build:desa": "docker build -t task-admin-frontend-desa -f Dockerfile.dev .",
     "docker-run-container:desa": "docker run -d -p 4200:4200 -v .:/app task-admin-frontend-desa",
     "create-app:desa": "npm run docker-build:desa && npm run docker-run-container:desa",
-    "test": "ng test",
+    "test": "ng test --browsers=ChromeHeadless --watch=false",
     "lint": "ng lint"
   },
   "private": true,

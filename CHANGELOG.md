@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2025-07-30
+
+- Add tests to application.
+
 ## [2.0.0] - 2025-07-28
 
 - Dockerize application in development and production environment.
