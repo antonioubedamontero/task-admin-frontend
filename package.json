@@ -15,6 +15,7 @@
     "docker-run-container:desa": "docker run -d -p 4200:4200 -v .:/app task-admin-frontend-desa",
     "create-app:desa": "npm run docker-build:desa && npm run docker-run-container:desa",
     "test": "ng test --browsers=ChromeHeadless --watch=false",
+    "test:coverage": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
     "lint": "ng lint"
   },
   "private": true,
