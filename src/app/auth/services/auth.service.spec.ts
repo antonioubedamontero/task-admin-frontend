@@ -7,7 +7,7 @@ import {
 
 import { AuthService } from './auth.service';
 import { environment } from '../../../environments/environment';
-import { LocalStorageMock } from '../../testing/services';
+import { LocalStorageMock } from '../../../../testing/services';
 
 const BASE_URL = environment.BASE_URL;
 

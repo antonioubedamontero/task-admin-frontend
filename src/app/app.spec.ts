@@ -9,7 +9,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { App } from './app';
 import { httpLoaderFactory } from './app.config';
 import { LanguageService } from './auth/services/language.service';
-import { LanguageServiceMock } from './testing/services';
+import { LanguageServiceMock } from '../../testing/services';
 import { routes } from './app.routes';
 
 describe('App', () => {
@@ -27,7 +27,7 @@ describe('App', () => {
         return {
           path,
           loadComponent: () =>
-            import('./testing/components/auth-layout.component.mock'),
+            import('../../testing/components/auth-layout.component.mock'),
           children: [],
         };
       }
@@ -36,7 +36,7 @@ describe('App', () => {
         return {
           path,
           loadComponent: () =>
-            import('./testing/components/task-layout.component.mock'),
+            import('../../testing/components/task-layout.component.mock'),
           children: [],
         };
       }
