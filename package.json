@@ -16,7 +16,7 @@
     "create-app:desa": "npm run docker-build:desa && npm run docker-run-container:desa",
     "test": "ng test",
     "test:headless": "ng test --browsers=ChromeHeadless --watch=false",
-    "test:coverage": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
+    "test:headless-coverage": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
     "lint": "ng lint"
   },
   "private": true,

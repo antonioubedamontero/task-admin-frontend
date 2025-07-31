@@ -33,7 +33,6 @@ export class AuthService {
   }
 
   saveTokenToStorage(token: string): void {
-    if (!token) return;
     this.token.set(token);
     localStorage.setItem('token', token);
   }
@@ -45,7 +44,6 @@ export class AuthService {
   }
 
   saveNameAndSurnameToStorage(nameSurname: string): void {
-    if (!nameSurname) return;
     this.nameAndSurname.set(nameSurname);
     localStorage.setItem('nameAndSurname', nameSurname);
   }
