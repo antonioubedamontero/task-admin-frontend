@@ -13,6 +13,6 @@ export interface UserLoginResponse {
   email: string;
   name: string;
   surname: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }

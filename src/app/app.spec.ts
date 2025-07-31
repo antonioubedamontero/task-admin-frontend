@@ -91,7 +91,7 @@ describe('App', () => {
 
   describe('should navigate to routes', () => {
     it('should navigate to auth routes', (done) => {
-      router.navigateByUrl('/auth').then((successNavigation) => {
+      router.navigateByUrl('/auth').then(() => {
         fixture.detectChanges();
         const htmlAuthLayout =
           fixture.nativeElement.querySelector('div#auth-layout');
@@ -101,7 +101,7 @@ describe('App', () => {
     });
 
     it('should navigate to tasks routes', (done) => {
-      router.navigateByUrl('/tasks').then((successNavigation) => {
+      router.navigateByUrl('/tasks').then(() => {
         fixture.detectChanges();
         const htmlTasksLayout =
           fixture.nativeElement.querySelector('div#tasks-layout');
