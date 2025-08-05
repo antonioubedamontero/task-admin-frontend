@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HeaderService } from './header.service';
 import { Location } from '@angular/common';
 
-fdescribe('HeaderService', () => {
+describe('HeaderService', () => {
   let service: HeaderService;
   let router: Router;
   let routerSpy: jasmine.Spy;
