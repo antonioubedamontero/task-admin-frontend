@@ -10,7 +10,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { ModelUserFeedbackType } from '../../interfaces';
 
-interface ModalUserFeedbackClass {
+export interface ModalUserFeedbackClass {
   color: string;
   icon: string;
 }

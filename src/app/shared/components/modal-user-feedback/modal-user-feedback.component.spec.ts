@@ -19,7 +19,7 @@ const lucideIcons = {
   CircleCheck,
 };
 
-fdescribe('ModalUserFeedbackComponent', () => {
+describe('ModalUserFeedbackComponent', () => {
   let component: ModalUserFeedbackComponent;
   let fixture: ComponentFixture<ModalUserFeedbackComponent>;
 

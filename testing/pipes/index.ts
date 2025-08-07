@@ -1,1 +1,2 @@
-export * from './translate-service.mock';
+export * from './task-state-pipe.mock';
+export * from './translate-pipe.mock';

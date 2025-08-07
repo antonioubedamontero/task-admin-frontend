@@ -31,29 +31,21 @@ export class UserService {
   login(userLogin: LoginRequest): Observable<LoginResponse> {
     return this.http
       .post<LoginResponse>(`${BASE_URL}/users/login`, userLogin)
-      .pipe(
-        tap((resp) => {
-          const { token } = resp;
-          const { name, surname } = resp.user;
-          const nameAndSurname = `${name} ${surname}`;
-
-          this.authService.saveNameAndSurnameToStorage(nameAndSurname);
-          this.authService.saveTokenToStorage(token);
-        })
-      );
+      .pipe(tap((resp) => this.saveUserToStorage(resp)));
   }
 
   register(newUser: RegisterRequest): Observable<RegisterResponse> {
     return this.http
       .post<RegisterResponse>(`${BASE_URL}/users/register`, newUser)
-      .pipe(
-        tap((resp) => {
-          const { token } = resp;
-          const { name, surname } = resp.user;
-          const nameAndSurname = `${name} ${surname}`;
-          this.authService.saveNameAndSurnameToStorage(nameAndSurname);
-          this.authService.saveTokenToStorage(token);
-        })
-      );
+      .pipe(tap((resp) => this.saveUserToStorage(resp)));
+  }
+
+  private saveUserToStorage(resp: LoginResponse | RegisterResponse): void {
+    const { token } = resp;
+    const { name, surname } = resp.user;
+    const nameAndSurname = `${name} ${surname}`;
+
+    this.authService.saveNameAndSurnameToStorage(nameAndSurname);
+    this.authService.saveTokenToStorage(token);
   }
 }
