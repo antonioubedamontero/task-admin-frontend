@@ -5,7 +5,7 @@ import { provideRouter, Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { throwError } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import LoginComponent from './login.component';
 import { TranslatePipeMock } from '../../../../../testing/pipes';
@@ -45,7 +45,6 @@ describe('LoginComponent', () => {
         ModalUserFeedbackComponentMock,
         RouterLink,
         LoginComponent,
-        TranslatePipeMock,
       ],
       providers: [
         FormService,
@@ -64,6 +63,9 @@ describe('LoginComponent', () => {
       ],
     })
       .overrideComponent(LoginComponent, {
+        remove: {
+          imports: [TranslateModule],
+        },
         add: {
           imports: [TranslatePipeMock],
         },
