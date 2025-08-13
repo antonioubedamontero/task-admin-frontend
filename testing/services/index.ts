@@ -4,3 +4,4 @@ export * from './auth-service.mock';
 export * from './translate-service.mock';
 export * from './user-service.mock';
 export * from './header-service.mock';
+export * from './task.service.mock';
