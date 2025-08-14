@@ -3,6 +3,7 @@
     class="bg-blue-700 opacity-75 text-white p-2 rounded-tl-sm rounded-tr-sm"
   >
     <button
+      id="toggle-task-details"
       class="w-full flex items-center justify-center gap-2"
       type="button"
       (click)="toggleIsLogOpen()"
@@ -15,7 +16,10 @@
     </button>
   </header>
   @if(isLogDetailsOpen()) {
-  <div class="overflow-x-auto w-full border-1 border-gray-400 p-2">
+  <div
+    id="task-log-details"
+    class="overflow-x-auto w-full border-1 border-gray-400 p-2"
+  >
     <table class="table-fixed min-w-[600px] w-full">
       <thead class="border-cell table-header">
         <tr>

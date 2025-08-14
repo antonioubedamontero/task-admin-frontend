@@ -15,6 +15,7 @@ import {
   TranslatePipeMock,
 } from '../../../../../testing/pipes';
 import { TranslateServiceMock } from '../../../../../testing/services';
+import { logStateResponseData1 } from '../../../../../testing/data';
 
 describe('TaskLogSectionComponent', () => {
   let component: TaskLogSectionComponent;
@@ -50,10 +51,43 @@ describe('TaskLogSectionComponent', () => {
 
     fixture = TestBed.createComponent(TaskLogSectionComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('logStates', [
+      logStateResponseData1,
+      logStateResponseData1,
+      logStateResponseData1,
+    ]);
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render task log details hidden by default', () => {
+    const taskLogDetailsHtml =
+      fixture.nativeElement.querySelector('#task-log-details');
+    expect(component.isLogDetailsOpen()).toBeFalsy();
+    expect(taskLogDetailsHtml).toBeFalsy();
+  });
+
+  it('should render task log details when click on button', () => {
+    const toggleButton: HTMLButtonElement = fixture.nativeElement.querySelector(
+      '#toggle-task-details'
+    );
+    toggleButton.click();
+    fixture.detectChanges();
+
+    const taskLogDetailsHtml: HTMLCollection =
+      fixture.nativeElement.querySelector('#task-log-details');
+    expect(taskLogDetailsHtml).toBeTruthy();
+
+    const taskLogDetailsHtmlElements =
+      fixture.nativeElement.querySelectorAll('td');
+    console.log('data', taskLogDetailsHtmlElements);
+    expect(taskLogDetailsHtmlElements.length).toBe(
+      component.logStates().length * 4
+    );
   });
 });
