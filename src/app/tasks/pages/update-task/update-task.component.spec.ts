@@ -144,7 +144,7 @@ describe('UpdateTasksComponent', () => {
     expect(htmlStartDateControl).toBeTruthy();
     expect(htmlStartDateControl.value).toBe(
       component.formatDateService.getDate(
-        new Date(component.taskDetailValue()?.startDate!).toISOString(),
+        new Date(component.taskDetailValue()?.startDate ?? '').toISOString(),
         false
       )
     );
@@ -154,7 +154,7 @@ describe('UpdateTasksComponent', () => {
     expect(htmlStartTimeControl).toBeTruthy();
     expect(htmlStartTimeControl.value).toBe(
       component.formatDateService.getTime(
-        new Date(component.taskDetailValue()?.startDate!).toISOString(),
+        new Date(component.taskDetailValue()?.startDate ?? '').toISOString(),
         false
       )
     );
@@ -164,7 +164,7 @@ describe('UpdateTasksComponent', () => {
     expect(htmlDueDateControl).toBeTruthy();
     expect(htmlDueDateControl.value).toBe(
       component.formatDateService.getDate(
-        new Date(component.taskDetailValue()?.dueDate!).toISOString(),
+        new Date(component.taskDetailValue()?.dueDate ?? '').toISOString(),
         false
       )
     );
@@ -174,7 +174,7 @@ describe('UpdateTasksComponent', () => {
     expect(htmlDueTimeControl).toBeTruthy();
     expect(htmlDueTimeControl.value).toBe(
       component.formatDateService.getTime(
-        new Date(component.taskDetailValue()?.dueDate!).toISOString(),
+        new Date(component.taskDetailValue()?.dueDate ?? '').toISOString(),
         false
       )
     );
@@ -211,8 +211,7 @@ describe('UpdateTasksComponent', () => {
 
     expect(getTaskByIdSpy).toHaveBeenCalled();
 
-    const { name, description, currentState, startDate, dueDate } =
-      taskResponseItemData;
+    const { name, description, currentState } = taskResponseItemData;
 
     const formTaskDetailValue = component.taskDetailsForm.value;
     const expectedFormTaskDetailValue = {
@@ -254,7 +253,7 @@ describe('UpdateTasksComponent', () => {
   it('should reset form if reset form method is trigged', () => {
     fixture.detectChanges();
 
-    const { _id, name, description, currentState, startDate, dueDate } =
+    const { _id, name, description, currentState } =
       component.taskDetailValue()!;
 
     component.resetForm();

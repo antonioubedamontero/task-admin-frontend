@@ -26,7 +26,6 @@ describe('RegisterComponent', () => {
   let registerCallSpy: jasmine.Spy;
   let router: Router;
   let routerSpy: jasmine.Spy;
-  let messageService: MessageService;
   let messageServiceSpy: jasmine.Spy;
 
   beforeEach(async () => {
@@ -76,7 +75,6 @@ describe('RegisterComponent', () => {
 
     router = TestBed.inject(Router);
     routerSpy = spyOn(router, 'navigateByUrl').and.callThrough();
-    messageService = TestBed.inject(MessageService);
     messageServiceSpy = spyOn(
       component.messageService,
       'showModal'
@@ -175,6 +173,7 @@ describe('RegisterComponent', () => {
 
       expect(component.registerForm.valid).toBeTruthy();
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { repeatPassword, ...sentNewUser } = newUser;
       expect(registerCallSpy).toHaveBeenCalledWith(sentNewUser);
       expect(routerSpy).toHaveBeenCalledWith('/tasks');

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { importProvidersFrom } from '@angular/core';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -49,7 +49,6 @@ const lucideIcons = {
 describe('TasksComponent', () => {
   let component: TasksComponent;
   let fixture: ComponentFixture<TasksComponent>;
-  let router: Router;
   let routerSpy: jasmine.Spy;
   let taskServiceSpy: jasmine.Spy;
 
@@ -96,7 +95,6 @@ describe('TasksComponent', () => {
     fixture = TestBed.createComponent(TasksComponent);
     component = fixture.componentInstance;
 
-    router = TestBed.inject(Router);
     routerSpy = spyOn(component.router, 'navigateByUrl').and.callThrough();
     taskServiceSpy = spyOn(
       component.taskService,
