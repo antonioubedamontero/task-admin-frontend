@@ -116,7 +116,7 @@ export class MiniTaskComponent {
     this.messageService.isModalShown.set(false);
     if (this.messageService.modalType() === ModelUserFeedbackType.success) {
       this.reloadTasks.emit(true);
-      this.router.navigateByUrl('/tasks');
+      this.router.navigate(['/tasks']);
     }
   }
 }

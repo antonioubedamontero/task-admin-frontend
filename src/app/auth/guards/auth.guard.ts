@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 
 import { AuthService } from '../services';
 
-export const AuthGuard: CanMatchFn = async () => {
+export const authGuard: CanMatchFn = async () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 

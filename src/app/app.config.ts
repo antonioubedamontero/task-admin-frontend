@@ -63,7 +63,7 @@ const lucideIcons = {
   X,
 };
 
-const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
+export const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
 ) => new TranslateHttpLoader(http, './i18n/', '.json');
 

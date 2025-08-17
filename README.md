@@ -61,3 +61,15 @@ To execute unit tests use the following command:
 ```bash
 npm run test
 ```
+
+To execute unit tests with a chrome headless use the following command:
+
+```bash
+npm run test:headless
+```
+
+To execute unit tests with a chrome headless with test coverage use the following command:
+
+```bash
+npm test:headless-coverage
+```

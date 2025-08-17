@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { taskRoutes } from './task.routes';
 import { authRoutes } from './auth.routes';
-import { AuthGuard } from './auth/guards';
+import { authGuard } from './auth/guards';
 
 export const routes: Routes = [
   {
@@ -18,7 +18,7 @@ export const routes: Routes = [
   },
   {
     path: 'tasks',
-    canMatch: [AuthGuard],
+    canMatch: [authGuard],
     loadComponent: () =>
       import('./tasks/layouts/tasks-layout/tasks-layout.component'),
     children: [...taskRoutes],

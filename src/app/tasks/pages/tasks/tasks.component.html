@@ -1,4 +1,8 @@
-<button class="mt-20 sm:mt-12 mb-3 blue-button flex gap-2" (click)="addTask()">
+<button
+  id="add-tasks-button"
+  class="mt-20 sm:mt-12 mb-3 blue-button flex gap-2"
+  (click)="addTask()"
+>
   <lucide-icon name="plus"></lucide-icon>
   <span>{{ "tasks.addTaskBtn" | translate }}</span>
 </button>
@@ -7,6 +11,7 @@
   class="grid grid-cols-1 border-1 border-gray-400 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
 >
   <app-mini-task-by-category
+    id="created"
     class="border-1 border-gray-400"
     icon="flower-2"
     [title]="'tasks.taskStates.CREATED' | translate"
@@ -17,6 +22,7 @@
 
   <!-- -->
   <app-mini-task-by-category
+    id="started"
     class="border-1 border-gray-400"
     icon="clipboard-pen"
     [title]="'tasks.taskStates.STARTED' | translate"
@@ -26,6 +32,7 @@
   />
   <!-- -->
   <app-mini-task-by-category
+    id="paused"
     class="border-1 border-gray-400"
     icon="pause"
     [title]="'tasks.taskStates.PAUSED' | translate"
@@ -35,6 +42,7 @@
   />
   <!-- -->
   <app-mini-task-by-category
+    id="canceled"
     class="hidden xl:block xl:border-1 xl:border-gray-400"
     icon="trash"
     [title]="'tasks.taskStates.CANCELED' | translate"
@@ -44,6 +52,7 @@
   />
   <!-- -->
   <app-mini-task-by-category
+    id="ended"
     class="border-1 border-gray-400"
     icon="flag"
     [title]="'tasks.taskStates.ENDED' | translate"

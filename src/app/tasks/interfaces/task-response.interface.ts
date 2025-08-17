@@ -23,7 +23,7 @@ export interface TaskResponseItem {
 
 export interface LogStateResponse {
   startDate: string;
-  endDate?: string;
+  endDate?: string | null;
   state: TaskState;
   justification: string;
 }
