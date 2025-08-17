@@ -85,7 +85,6 @@ describe('TaskLogSectionComponent', () => {
 
     const taskLogDetailsHtmlElements =
       fixture.nativeElement.querySelectorAll('td');
-    console.log('data', taskLogDetailsHtmlElements);
     expect(taskLogDetailsHtmlElements.length).toBe(
       component.logStates().length * 4
     );

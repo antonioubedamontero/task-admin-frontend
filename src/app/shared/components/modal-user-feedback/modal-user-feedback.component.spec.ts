@@ -50,19 +50,19 @@ describe('ModalUserFeedbackComponent', () => {
   it('should render a title', () => {
     const htmlTitle: HTMLParagraphElement =
       fixture.nativeElement.querySelector('#title');
-    expect(htmlTitle.nodeValue).toBe(component.title());
+    expect(htmlTitle.innerHTML.trim()).toBe(component.title());
   });
 
   it('should render a description', () => {
     const htmlDescription: HTMLParagraphElement =
       fixture.nativeElement.querySelector('#description');
-    expect(htmlDescription.nodeValue).toBe(component.description());
+    expect(htmlDescription.innerHTML.trim()).toBe(component.description());
   });
 
   it('should render a button', () => {
     const htmlButton: HTMLButtonElement =
       fixture.nativeElement.querySelector('button');
-    expect(htmlButton.value).toBe(component.buttonText());
+    expect(htmlButton.innerHTML.trim()).toBe(component.buttonText());
   });
 
   it('should emit true when close method is called', () => {
@@ -110,7 +110,8 @@ describe('ModalUserFeedbackComponent', () => {
         fixture.componentRef.setInput('modalType', 'wrongModalTypeValue');
         fixture.detectChanges();
       } catch (error) {
-        expect(error).toBe('TextModalIconAndColor is undefined');
+        const expectedError = new Error('TextModalIconAndColor is undefined');
+        expect(error).toEqual(expectedError);
       }
     });
   });

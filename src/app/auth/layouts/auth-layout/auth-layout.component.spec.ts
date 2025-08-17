@@ -8,7 +8,7 @@ describe('Auth-layoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AuthLayoutComponent],
+      imports: [AuthLayoutComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthLayoutComponent);
@@ -18,5 +18,11 @@ describe('Auth-layoutComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render a router-outlet', () => {
+    const htmlRouterOutler =
+      fixture.nativeElement.querySelector('router-outlet');
+    expect(htmlRouterOutler).toBeTruthy();
   });
 });

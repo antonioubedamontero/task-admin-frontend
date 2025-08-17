@@ -2,9 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.1.0] - 2025-07-30
+## [2.1.0] - 2025-08-17
 
 - Add tests to application.
+- Add some more scripts and update README.md.
+- Fix lint errors.
 
 ## [2.0.0] - 2025-07-28
 
